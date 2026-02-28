@@ -1,6 +1,6 @@
 // Настройки API для Cloudflare Worker
 // Обязательно замените этот URL на ваш реальный после деплоя воркера!
-const API_BASE = "https://your-worker-url.workers.dev";
+const API_BASE = "https://custom-level-api.likirill.workers.dev";
 
 // --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
 const DEFAULT_PLACEHOLDER = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='64' height='64' fill='%232d3436'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='%23636e72' dominant-baseline='middle' text-anchor='middle'>?</text></svg>";
@@ -656,4 +656,5 @@ function copyTicket() {
         btn.innerText = "Copied!";
         setTimeout(() => btn.innerText = "Copy Ticket", 2000);
     });
+
 }

@@ -1,6 +1,6 @@
 // Настройки API для Cloudflare Worker
 // Обязательно замените этот URL на ваш реальный после деплоя воркера!
-const API_BASE = "https://your-worker-url.workers.dev";
+const API_BASE = "https://custom-level-api.likirill.workers.dev";
 
 // --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
 // --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
@@ -826,4 +826,5 @@ function copyTicket() {
         btn.innerText = "Copied!";
         setTimeout(() => btn.innerText = "Copy Ticket", 2000);
     });
+
 }

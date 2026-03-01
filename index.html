@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Level Builder</title>
+    <title>Конструктор уровней</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,35 +13,39 @@
     <div class="app-container">
         <header class="top-bar glass">
             <div class="title-area">
-                <h1>Level Builder</h1>
-                <input type="text" id="level-name-input" value="My Custom Level" title="Название уровня">
+                <h1>Конструктор уровней</h1>
+                <input type="text" id="level-name-input" value="Мой кастомный уровень" title="Название уровня">
             </div>
             <div class="controls">
                 <div class="ticket-search" style="display: flex; gap: 10px; margin-right: 15px; border-right: 1px dashed var(--glass-border); padding-right: 15px; align-items: center;">
                     <input type="text" id="ticket-input" placeholder="LVL-XXXXXX" class="input-glass" style="width: 130px; padding: 8px;">
-                    <button id="btn-find-ticket" class="btn btn-secondary">Find</button>
-                    <button id="btn-send-level" class="btn btn-primary">Send Level</button>
+                    <button id="btn-find-ticket" class="btn btn-secondary">Найти</button>
+                    <button id="btn-send-level" class="btn btn-primary">Отправить уровень</button>
                 </div>
 
                 <label class="toggle-label">
                     <input type="checkbox" id="autosave-toggle">
-                    Auto-save
+                    Автосохранение
                 </label>
-                <button id="btn-reset" class="btn btn-danger">Reset</button>
+                <button id="btn-reset" class="btn btn-danger">Сброс</button>
                 <input type="file" id="import-file" accept=".json" hidden>
-                <button id="btn-import" class="btn btn-secondary">Import JSON</button>
-                <button id="btn-export" class="btn btn-primary">Export JSON</button>
+                <button id="btn-import" class="btn btn-secondary">Импорт JSON</button>
+                <button id="btn-export" class="btn btn-primary">Экспорт JSON</button>
             </div>
         </header>
 
+        <div id="active-modifiers-banner" class="glass" style="margin-top: -10px; padding: 10px 20px; display: none; border-color: var(--accent); color: var(--accent);">
+            <strong>Активные модификаторы:</strong> <span id="active-modifiers-text"></span>
+        </div>
+
         <section class="section glass">
-            <h2>Banned Characters (4 slots)</h2>
+            <h2>Баны (4 персонажа)</h2>
             <div id="banned-container" class="party-grid">
                 </div>
 
             <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
-                <h2>Unlocked Characters</h2>
-                <button class="btn btn-primary" onclick="openCharacterPicker('unlock')">+ Unlock Characters</button>
+                <h2>Разблокированные персонажи <span id="unlocked-counter" style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;">(Разблокировано: 0)</span></h2>
+                <button class="btn btn-primary" onclick="openCharacterPicker('unlock')">+ Разблокировать персонажей</button>
             </div>
             <div id="unlocked-container" class="party-grid" style="flex-wrap: wrap;">
                 </div>
@@ -49,8 +53,8 @@
 
         <section class="section waves-section">
             <div class="section-header">
-                <h2>Enemy Waves</h2>
-                <button id="btn-add-wave" class="btn btn-primary">+ Add Wave</button>
+                <h2>Волны противников</h2>
+                <button id="btn-add-wave" class="btn btn-primary">+ Добавить волну</button>
             </div>
             <div id="waves-container" class="waves-list">
                 </div>
@@ -58,7 +62,7 @@
 
         <section class="section challenges-section glass">
             <div class="section-header">
-                <h2>Special Challenges (Paid)</h2>
+                <h2>Модификаторы (платно)</h2>
             </div>
             <div id="challenges-container" class="challenges-grid">
                 </div>
@@ -68,26 +72,26 @@
     <div id="enemy-picker-modal" class="modal hidden">
         <div class="modal-content glass-strong">
             <div class="modal-header">
-                <h2>Select Enemy</h2>
+                <h2>Выбор противника</h2>
                 <button class="btn-close" onclick="closeModal('enemy-picker-modal')">✕</button>
             </div>
             <div class="modal-body with-sidebar">
                 <aside class="sidebar">
-                    <button class="tab-btn active" data-tab="bosses">Bosses</button>
-                    <button class="tab-btn" data-tab="weekly">Weekly Bosses</button>
-                    <button class="tab-btn" data-tab="custom-list">Custom Pool</button>
-                    <button class="tab-btn tab-highlight" data-tab="custom-create">+ Create Custom</button>
+                    <button class="tab-btn active" data-tab="bosses">Боссы</button>
+                    <button class="tab-btn" data-tab="weekly">Еженедельные боссы</button>
+                    <button class="tab-btn" data-tab="custom-list">Свой пул</button>
+                    <button class="tab-btn tab-highlight" data-tab="custom-create">+ Создать своего</button>
                 </aside>
                 <main class="picker-main">
                     <div class="picker-toolbar" id="enemy-toolbar">
-                        <input type="text" id="enemy-search" placeholder="Search enemy..." class="input-glass">
+                        <input type="text" id="enemy-search" placeholder="Поиск..." class="input-glass">
                         <select id="enemy-sort" class="input-glass">
-                            <option value="none">Sort</option>
-                            <option value="az">A-Z</option>
-                            <option value="za">Z-A</option>
+                            <option value="none">Сортировка</option>
+                            <option value="az">А–Я</option>
+                            <option value="za">Я–А</option>
                         </select>
                         <select id="enemy-filter" class="input-glass">
-                            <option value="all">All Elements</option>
+                            <option value="all">Все уязвимости</option>
                             <option value="Fire">Fire</option>
                             <option value="Water">Water</option>
                             <option value="Electro">Electro</option>
@@ -99,25 +103,25 @@
                         </div>
 
                     <div id="custom-enemy-form" class="custom-form hidden">
-                        <h3>Create Custom Enemy</h3>
+                        <h3>Создать своего противника</h3>
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" id="ce-name" placeholder="E.g. Void Dragon" class="input-glass">
+                            <label>Имя</label>
+                            <input type="text" id="ce-name" placeholder="Напр. Мусорный бак" class="input-glass">
                         </div>
                         <div class="form-group">
-                            <label>Level</label>
+                            <label>Уровень</label>
                             <input type="number" id="ce-level" value="95" min="1" max="95" class="input-glass">
                         </div>
                         <div class="form-group">
-                            <label>Element / Type</label>
-                            <input type="text" id="ce-element" placeholder="E.g. Fire" class="input-glass">
+                            <label>Уязвимость / Тип</label>
+                            <input type="text" id="ce-element" placeholder="Напр. Огонь" class="input-glass">
                         </div>
                         <div class="form-group">
-                            <label>Icon URL</label>
+                            <label>URL иконки</label>
                             <input type="text" id="ce-icon" placeholder="assets/enemies/my_boss.png" class="input-glass">
-                            <small>Use local path or external URL</small>
+                            <small>Локальный путь или ссылка</small>
                         </div>
-                        <button id="btn-create-custom" class="btn btn-primary w-100">Create & Add to Wave</button>
+                        <button id="btn-create-custom" class="btn btn-primary w-100">Создать и добавить</button>
                     </div>
                 </main>
             </div>
@@ -127,19 +131,19 @@
     <div id="char-picker-modal" class="modal hidden">
         <div class="modal-content glass-strong modal-lg">
             <div class="modal-header">
-                <h2 id="char-picker-title">Select Character</h2>
+                <h2 id="char-picker-title">Выбор персонажа</h2>
                 <button class="btn-close" onclick="closeModal('char-picker-modal')">✕</button>
             </div>
             <div class="modal-body" style="flex-direction: column;">
                 <div class="picker-toolbar char-toolbar">
-                    <input type="text" id="char-search" placeholder="Search character..." class="input-glass">
+                    <input type="text" id="char-search" placeholder="Поиск..." class="input-glass">
                     <select id="char-sort" class="input-glass">
-                        <option value="none">Sort</option>
-                        <option value="az">A-Z</option>
-                        <option value="za">Z-A</option>
+                        <option value="none">Сортировка</option>
+                        <option value="az">А–Я</option>
+                        <option value="za">Я–А</option>
                     </select>
                     <label class="toggle-label" id="label-filter-banned" style="margin-left: auto; display: flex; align-items: center; gap: 5px;">
-                        <input type="checkbox" id="char-filter-banned"> Show banned
+                        <input type="checkbox" id="char-filter-banned"> Показать забаненных
                     </label>
                 </div>
                 <div id="char-grid" class="picker-grid char-grid-large">
@@ -151,14 +155,14 @@
     <div id="purchase-modal" class="modal hidden">
         <div class="modal-content glass-strong modal-sm">
             <div class="modal-header">
-                <h2>Confirm Purchase</h2>
+                <h2>Подтвердить покупку</h2>
                 <button class="btn-close" onclick="closeModal('purchase-modal')">✕</button>
             </div>
             <div class="modal-body" style="flex-direction: column; padding: 20px; text-align: center; gap: 15px;">
-                <p id="purchase-text">Buy this challenge?</p>
+                <p id="purchase-text">Купить этот модификатор?</p>
                 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
-                    <button class="btn btn-secondary w-100" onclick="closeModal('purchase-modal')">Cancel</button>
-                    <button class="btn btn-primary w-100" id="btn-confirm-purchase">Confirm</button>
+                    <button class="btn btn-secondary w-100" onclick="closeModal('purchase-modal')">Отмена</button>
+                    <button class="btn btn-primary w-100" id="btn-confirm-purchase">Подтвердить</button>
                 </div>
             </div>
         </div>
@@ -167,15 +171,15 @@
     <div id="ticket-modal" class="modal hidden">
         <div class="modal-content glass-strong modal-sm" style="text-align: center;">
             <div class="modal-header">
-                <h2>Level Sent! ✅</h2>
+                <h2>Уровень отправлен! ✅</h2>
                 <button class="btn-close" onclick="closeModal('ticket-modal')">✕</button>
             </div>
             <div class="modal-body" style="flex-direction: column; padding: 20px; gap: 15px;">
-                <p style="color: var(--text-muted);">Your level has been uploaded successfully.</p>
+                <p style="color: var(--text-muted);">Уровень успешно сохранен в облаке.</p>
                 <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent); letter-spacing: 2px;" id="ticket-display">
                     LVL-XXXXXX
                 </div>
-                <button class="btn btn-primary w-100" id="btn-copy-ticket" style="margin-top: 10px;">Copy Ticket</button>
+                <button class="btn btn-primary w-100" id="btn-copy-ticket" style="margin-top: 10px;">Скопировать тикет</button>
             </div>
         </div>
     </div>

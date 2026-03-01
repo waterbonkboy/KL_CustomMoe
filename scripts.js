@@ -45,15 +45,77 @@ const ENEMIES_WEEKLY = [
     { id: "stalesklep", name: "Сталесклеп", icon: "assets/weekly/stalesklep.png", element: null, tags: [], defaultLevel: 95 }
 ];
 
-// массив CHARACTERS оставляем без изменений...
+const OWNED_CHARACTERS = [
+    { id: "mart_7", name: "Март 7", icon: "assets/chars/mart_7.png", eidolons: 6 },
+    { id: "himeko", name: "Химеко", icon: "assets/chars/himeko.png", eidolons: 1 },
+    { id: "velt", name: "Вельт", icon: "assets/chars/velt.png", eidolons: 2 },
+    { id: "kafka", name: "Кафка", icon: "assets/chars/kafka.png", eidolons: 0 },
+    { id: "serebryanyy_volk", name: "Серебряный Волк", icon: "assets/chars/serebryanyy_volk.png", eidolons: 0 },
+    { id: "arlan", name: "Арлан", icon: "assets/chars/arlan.png", eidolons: 6 },
+    { id: "asta", name: "Аста", icon: "assets/chars/asta.png", eidolons: 6 },
+    { id: "gerta", name: "Герта", icon: "assets/chars/gerta.png", eidolons: 6 },
+    { id: "seyber", name: "Сэйбер", icon: "assets/chars/seyber.png", eidolons: 0 },
+    { id: "archer", name: "Арчер", icon: "assets/chars/archer.png", eidolons: 0 },
+    { id: "bronya", name: "Броня", icon: "assets/chars/bronya.png", eidolons: 5 },
+    { id: "zele", name: "Зеле", icon: "assets/chars/zele.png", eidolons: 1 },
+    { id: "serval", name: "Сервал", icon: "assets/chars/serval.png", eidolons: 6 },
+    { id: "gepard", name: "Гепард", icon: "assets/chars/gepard.png", eidolons: 2 },
+    { id: "natasha", name: "Наташа", icon: "assets/chars/natasha.png", eidolons: 6 },
+    { id: "pelageya", name: "Пелагея", icon: "assets/chars/pelageya.png", eidolons: 6 },
+    { id: "klara", name: "Клара", icon: "assets/chars/klara.png", eidolons: 2 },
+    { id: "sampo", name: "Сампо", icon: "assets/chars/sampo.png", eidolons: 6 },
+    { id: "huk", name: "Хук", icon: "assets/chars/huk.png", eidolons: 6 },
+    { id: "rys", name: "Рысь", icon: "assets/chars/rys.png", eidolons: 6 },
+    { id: "luka", name: "Лука", icon: "assets/chars/luka.png", eidolons: 6 },
+    { id: "topaz", name: "Топаз", icon: "assets/chars/topaz.png", eidolons: 0 },
+    { id: "tsintszyue", name: "ЦинЦюэ", icon: "assets/chars/tsintszyue.png", eidolons: 6 },
+    { id: "tinyun", name: "Тиньюнь", icon: "assets/chars/tinyun.png", eidolons: 6 },
+    { id: "general", name: "Генерал", icon: "assets/chars/general.png", eidolons: 0 },
+    { id: "bleyd", name: "Блэйд", icon: "assets/chars/bleyd.png", eidolons: 1 },
+    { id: "su_shan", name: "Су Шан", icon: "assets/chars/su_shan.png", eidolons: 6 },
+    { id: "yuykun", name: "ЮйКун", icon: "assets/chars/yuykun.png", eidolons: 6 },
+    { id: "fu_syuan", name: "Фу Сюань", icon: "assets/chars/fu_syuan.png", eidolons: 6 },
+    { id: "yan_tsin", name: "Янь Цин", icon: "assets/chars/yan_tsin.png", eidolons: 3 },
+    { id: "guynayfen", name: "Гуйнайфэнь", icon: "assets/chars/guynayfen.png", eidolons: 6 },
+    { id: "baylu", name: "Байлу", icon: "assets/chars/baylu.png", eidolons: 3 },
+    { id: "tszinlyu", name: "ЦзинЛю", icon: "assets/chars/tszinlyu.png", eidolons: 1 },
+    { id: "syuey", name: "Сюэй", icon: "assets/chars/syuey.png", eidolons: 6 },
+    { id: "hanya", name: "Ханья", icon: "assets/chars/hanya.png", eidolons: 6 },
+    { id: "hoho", name: "Хохо", icon: "assets/chars/hoho.png", eidolons: 0 },
+    { id: "fey_syao", name: "Фэй сяо", icon: "assets/chars/fey_syao.png", eidolons: 0 },
+    { id: "yun_li", name: "Юнь Ли", icon: "assets/chars/yun_li.png", eidolons: 0 },
+    { id: "linsha", name: "Линша", icon: "assets/chars/linsha.png", eidolons: 0 },
+    { id: "motsze", name: "Моцзэ", icon: "assets/chars/motsze.png", eidolons: 6 },
+    { id: "fuga", name: "ФуГа", icon: "assets/chars/fuga.png", eidolons: 0 },
+    { id: "gallaher", name: "Галлахер", icon: "assets/chars/gallaher.png", eidolons: 0 },
+    { id: "zhuan_mey", name: "Жуань Мэй", icon: "assets/chars/zhuan_mey.png", eidolons: 1 },
+    { id: "avantyurin_char", name: "Авантюрин", icon: "assets/chars/avantyurin.png", eidolons: 0 },
+    { id: "doktor_ratsio", name: "Доктор Рацио", icon: "assets/chars/doktor_ratsio.png", eidolons: 0 },
+    { id: "iskorka", name: "Искорка", icon: "assets/chars/iskorka.png", eidolons: 0 },
+    { id: "chernyy_lebed", name: "Черный Лебедь", icon: "assets/chars/chernyy_lebed.png", eidolons: 0 },
+    { id: "aheron", name: "Ахерон", icon: "assets/chars/aheron.png", eidolons: 0 },
+    { id: "zaryanka", name: "Зарянка", icon: "assets/chars/zaryanka.png", eidolons: 0 },
+    { id: "svetlyachok", name: "Светлячок", icon: "assets/chars/svetlyachok.png", eidolons: 0 },
+    { id: "misha", name: "Миша", icon: "assets/chars/misha.png", eidolons: 6 },
+    { id: "voskresene_char", name: "Воскресенье", icon: "assets/chars/voskresene.png", eidolons: 0 },
+    { id: "konstantsiya", name: "Констанция", icon: "assets/chars/konstantsiya.png", eidolons: 0 },
+    { id: "aglaya", name: "Аглая", icon: "assets/chars/aglaya.png", eidolons: 0 },
+    { id: "tribbi", name: "Трибби", icon: "assets/chars/tribbi.png", eidolons: 0 },
+    { id: "tsifer", name: "Цифер", icon: "assets/chars/tsifer.png", eidolons: 0 },
+    { id: "kastoriya", name: "Кастория", icon: "assets/chars/kastoriya.png", eidolons: 1 },
+    { id: "faenon", name: "Фаенон", icon: "assets/chars/faenon.png", eidolons: 0 },
+    { id: "giatsina", name: "Гиацина", icon: "assets/chars/giatsina.png", eidolons: 0 },
+    { id: "keridra", name: "Керидра", icon: "assets/chars/keridra.png", eidolons: 0 },
+    { id: "temen", name: "Темень", icon: "assets/chars/temen.png", eidolons: 0 },
+    { id: "danhen_schit", name: "ДаньХэн Щит", icon: "assets/chars/danhen_schit.png", eidolons: 0 },
+    { id: "kirena", name: "Кирена", icon: "assets/chars/kirena.png", eidolons: 4 },
+    { id: "yao_guan", name: "Яо Гуан", icon: "assets/chars/yao_guan.png", eidolons: 0 },
+    { id: "puteshestvennik", name: "Путешественник", icon: "assets/chars/puteshestvennik.png", eidolons: 6 },
+    { id: "dan_hey", name: "Дань Хэй", icon: "assets/chars/dan_hey.png", eidolons: 6 }
+];
 
-// массив CHARACTERS оставляем без изменений...
-
-const CHARACTERS = [
-    { id: "char_01", name: "Aria", element: "Fire", icon: "assets/chars/aria.png" },
-    { id: "char_02", name: "Kael", element: "Water", icon: "assets/chars/kael.png" },
-    { id: "char_03", name: "Nova", element: "Electro", icon: "assets/chars/nova.png" },
-    { id: "char_04", name: "Zane", element: "Physical", icon: "assets/chars/zane.png" }
+const LOCKED_CHARACTERS = [
+    { id: "example_locked", name: "Скрытый Герой", icon: "assets/chars/example.png" }
 ];
 
 const SPECIAL_CHALLENGES = [
@@ -72,7 +134,8 @@ let state = {
     waves: [
         { enemies: [] }, { enemies: [] }, { enemies: [] }, { enemies: [] }
     ],
-    party: [null, null, null, null],
+    bannedCharacters: [null, null, null, null],
+    unlockedCharacters: [],
     challenges: { unlocked: [], active: [] },
     meta: { createdAt: new Date().toISOString(), version: 1 }
 };
@@ -85,6 +148,7 @@ let currentActiveWaveIndex = null;
 let currentActiveSlotIndex = null;
 let currentEnemyTab = 'bosses';
 let pendingPurchaseId = null;
+let charPickerMode = 'ban'; // 'ban' или 'unlock'
 
 // --- ИНИЦИАЛИЗАЦИЯ ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -98,7 +162,8 @@ function getImagePath(path) {
 }
 
 window.imgError = function(image) {
-    image.onerror = "";
+    if (image.src.includes(DEFAULT_PLACEHOLDER)) return true;
+    image.onerror = null;
     image.src = DEFAULT_PLACEHOLDER;
     return true;
 }
@@ -107,32 +172,61 @@ window.imgError = function(image) {
 function renderAll() {
     document.getElementById('level-name-input').value = state.levelName;
     document.getElementById('autosave-toggle').checked = appSettings.autoSave;
-    renderParty();
+    renderCharacters();
     renderWaves();
     renderChallenges();
     triggerAutoSave();
 }
 
-function renderParty() {
-    const container = document.getElementById('party-container');
-    container.innerHTML = '';
+function renderCharacters() {
+    // 1. Рендер Banned Characters
+    const bContainer = document.getElementById('banned-container');
+    bContainer.innerHTML = '';
     
     for (let i = 0; i < 4; i++) {
-        const char = state.party[i];
+        const char = state.bannedCharacters[i];
         const slot = document.createElement('div');
         slot.className = 'char-slot';
         
         if (char) {
             slot.innerHTML = `
-                <img src="${getImagePath(char.icon)}" alt="${char.name}" onerror="imgError(this)">
-                <button class="btn-remove-char" onclick="removeCharacter(${i}, event)">✕</button>
+                <img src="${getImagePath(char.icon)}" alt="${char.name}" onerror="imgError(this)" title="${char.name}">
+                <button class="btn-remove-char" onclick="removeBannedCharacter(${i}, event)">✕</button>
             `;
         } else {
             slot.innerHTML = `<span style="color:var(--text-muted); font-size:24px;">+</span>`;
-            slot.onclick = () => openCharacterPicker(i);
+            slot.onclick = () => openCharacterPicker('ban', i);
         }
-        container.appendChild(slot);
+        bContainer.appendChild(slot);
     }
+
+    // 2. Рендер Unlocked Characters
+    const uContainer = document.getElementById('unlocked-container');
+    uContainer.innerHTML = '';
+    
+    state.unlockedCharacters.forEach((char, index) => {
+        const slot = document.createElement('div');
+        slot.className = 'char-slot';
+        slot.innerHTML = `
+            <img src="${getImagePath(char.icon)}" alt="${char.name}" onerror="imgError(this)" title="${char.name}">
+            <button class="btn-remove-char" onclick="removeUnlockedCharacter(${index}, event)">✕</button>
+        `;
+        uContainer.appendChild(slot);
+    });
+}
+
+function removeBannedCharacter(slotIndex, event) {
+    event.stopPropagation();
+    state.bannedCharacters[slotIndex] = null;
+    triggerAutoSave();
+    renderAll();
+}
+
+function removeUnlockedCharacter(index, event) {
+    event.stopPropagation();
+    state.unlockedCharacters.splice(index, 1);
+    triggerAutoSave();
+    renderAll();
 }
 
 function renderWaves() {
@@ -340,9 +434,18 @@ function createCustomEnemy() {
     document.getElementById('ce-icon').value = '';
 }
 
-// --- ПИКЕР ПЕРСОНАЖЕЙ ---
-function openCharacterPicker(slotIndex) {
+// --- ПИКЕР ПЕРСОНАЖЕЙ (НОВЫЙ) ---
+function openCharacterPicker(mode, slotIndex = null) {
+    charPickerMode = mode;
     currentActiveSlotIndex = slotIndex;
+    
+    const title = document.getElementById('char-picker-title');
+    title.innerText = mode === 'ban' ? 'Select Character to Ban' : 'Unlock Character';
+    
+    // Показываем фильтр "Show banned" только для режима банов
+    document.getElementById('label-filter-banned').style.display = mode === 'ban' ? 'flex' : 'none';
+    document.getElementById('char-filter-banned').checked = false; // сбрасываем фильтр
+    
     document.getElementById('char-picker-modal').classList.remove('hidden');
     renderCharPickerList();
 }
@@ -351,8 +454,15 @@ function renderCharPickerList() {
     const grid = document.getElementById('char-grid');
     const search = document.getElementById('char-search').value.toLowerCase();
     const sort = document.getElementById('char-sort').value;
+    const showBannedOnly = document.getElementById('char-filter-banned').checked;
 
-    let filtered = CHARACTERS.filter(c => c.name.toLowerCase().includes(search));
+    const pool = charPickerMode === 'ban' ? OWNED_CHARACTERS : LOCKED_CHARACTERS;
+    
+    let filtered = pool.filter(c => c.name.toLowerCase().includes(search));
+
+    if (charPickerMode === 'ban' && showBannedOnly) {
+        filtered = filtered.filter(c => state.bannedCharacters.some(bc => bc && bc.id === c.id));
+    }
 
     if (sort === 'az') filtered.sort((a, b) => a.name.localeCompare(b.name));
     if (sort === 'za') filtered.sort((a, b) => b.name.localeCompare(a.name));
@@ -361,27 +471,44 @@ function renderCharPickerList() {
     filtered.forEach(char => {
         const card = document.createElement('div');
         card.className = 'picker-card';
+        
+        const eidolonsHtml = (charPickerMode === 'ban' && char.eidolons !== undefined) 
+            ? `<div style="font-size:0.75rem; color:var(--text-muted); margin-bottom: 4px;">Эйдолонов: <span style="color:var(--accent);">${char.eidolons}</span></div>` 
+            : '';
+
+        const isAlreadyBanned = charPickerMode === 'ban' && state.bannedCharacters.some(bc => bc && bc.id === char.id);
+        const btnClass = isAlreadyBanned ? 'btn-danger' : 'btn-primary';
+        const btnText = charPickerMode === 'ban' ? (isAlreadyBanned ? 'Banned' : 'Ban') : 'Unlock';
+
         card.innerHTML = `
             <img src="${getImagePath(char.icon)}" alt="${char.name}" onerror="imgError(this)">
             <div class="name"><strong>${char.name}</strong></div>
-            <button class="btn btn-primary w-100" onclick="selectCharacter('${char.id}')">Select</button>
+            ${eidolonsHtml}
+            <button class="btn ${btnClass} w-100" onclick="selectCharacter('${char.id}')">
+                ${btnText}
+            </button>
         `;
         grid.appendChild(card);
     });
 }
 
 function selectCharacter(charId) {
-    const char = CHARACTERS.find(c => c.id === charId);
-    if (char && currentActiveSlotIndex !== null) {
-        state.party[currentActiveSlotIndex] = { ...char };
-        closeModal('char-picker-modal');
-        renderAll();
-    }
-}
+    const pool = charPickerMode === 'ban' ? OWNED_CHARACTERS : LOCKED_CHARACTERS;
+    const char = pool.find(c => c.id === charId);
+    
+    if (!char) return;
 
-function removeCharacter(slotIndex, event) {
-    event.stopPropagation();
-    state.party[slotIndex] = null;
+    if (charPickerMode === 'ban' && currentActiveSlotIndex !== null) {
+        state.bannedCharacters[currentActiveSlotIndex] = { ...char };
+    } else if (charPickerMode === 'unlock') {
+        const alreadyExists = state.unlockedCharacters.find(c => c.id === char.id);
+        if (!alreadyExists) {
+            state.unlockedCharacters.push({ ...char });
+        }
+    }
+    
+    triggerAutoSave();
+    closeModal('char-picker-modal');
     renderAll();
 }
 
@@ -474,6 +601,7 @@ function setupEventListeners() {
 
     document.getElementById('char-search').addEventListener('input', renderCharPickerList);
     document.getElementById('char-sort').addEventListener('change', renderCharPickerList);
+    document.getElementById('char-filter-banned').addEventListener('change', renderCharPickerList); // Новый фильтр
 
     document.getElementById('btn-export').addEventListener('click', exportJson);
     document.getElementById('btn-import').addEventListener('click', () => document.getElementById('import-file').click());
@@ -524,11 +652,12 @@ function importJson(event) {
     reader.onload = function(e) {
         try {
             const parsed = JSON.parse(e.target.result);
-            if (parsed.waves && parsed.party) {
+            if (parsed.waves) {
                 state = {
                     levelName: parsed.levelName || "Imported Level",
                     waves: parsed.waves,
-                    party: parsed.party,
+                    bannedCharacters: parsed.bannedCharacters || parsed.party || [null, null, null, null],
+                    unlockedCharacters: parsed.unlockedCharacters || [],
                     challenges: parsed.challenges || { unlocked: [], active: [] },
                     meta: parsed.meta || state.meta
                 };
@@ -551,7 +680,8 @@ function resetLevel() {
         state = {
             levelName: "My Custom Level",
             waves: [{ enemies: [] }, { enemies: [] }, { enemies: [] }, { enemies: [] }],
-            party: [null, null, null, null],
+            bannedCharacters: [null, null, null, null],
+            unlockedCharacters: [],
             challenges: { unlocked: [], active: [] },
             meta: { createdAt: new Date().toISOString(), version: 1 }
         };
@@ -579,6 +709,11 @@ function loadState() {
             if (savedData) {
                 const parsed = JSON.parse(savedData);
                 state = parsed.state;
+                // Восстановление обратной совместимости
+                if (!state.bannedCharacters && state.party) {
+                    state.bannedCharacters = state.party;
+                    state.unlockedCharacters = [];
+                }
                 customEnemiesPool = parsed.customEnemiesPool || [];
             }
         }
@@ -660,11 +795,12 @@ async function findLevelByTicket() {
 
         const parsed = await response.json();
 
-        if (parsed.waves && parsed.party) {
+        if (parsed.waves) {
             state = {
                 levelName: parsed.levelName || "Imported Level",
                 waves: parsed.waves,
-                party: parsed.party,
+                bannedCharacters: parsed.bannedCharacters || parsed.party || [null, null, null, null],
+                unlockedCharacters: parsed.unlockedCharacters || [],
                 challenges: parsed.challenges || { unlocked: [], active: [] },
                 meta: parsed.meta || state.meta
             };

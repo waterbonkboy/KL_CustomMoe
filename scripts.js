@@ -147,6 +147,7 @@ const SPECIAL_CHALLENGES = [
     { id: "sc_olezha_27", name: "Олежа 27", price_rub: 200, description: "20 волн светофоров ???", effect: { type: "custom_note", note: "20 волн светофоров ???" } },
     { id: "sc_hayato_live", name: "Хаято живи", price_rub: 30, description: "Добавить Жуань Мэй в команду и не дать ей погибнуть.", effect: { type: "mission", required_character_id: "ruan_mei", condition: "survive" } },
     { id: "sc_winter_falls", name: "Винтер Фолс", price_rub: 20, description: "Добавить Март 7 в отряд.", effect: { type: "force_character", character_id: "march_7" } },
+    { id: "sc_milo", name: "Злой Майло", price_rub: 80, description: "убрать 1 персонажа из отряда", effect: { type: "force_character", character_id: "march_7" } },
     { id: "sc_kindergarten_sun", name: "Детский Садик: Солнышко", price_rub: 100, description: "Использовать на уровне только мелких персонажей.", effect: { type: "rule", rule: "only_small_characters" } },
     { id: "sc_factions_one", name: "Фракции: одна на выбор", price_rub: 100, description: "Можно использовать только одну фракцию на выбор.", effect: { type: "choose_one_faction", options: ["Лофу", "Сяньчжоу", "Станция Герта", "Златиусы", "Другое"] } }
 ];
@@ -936,3 +937,4 @@ function copyTicket() {
     });
 
 }
+

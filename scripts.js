@@ -940,4 +940,5 @@ function copyTicket() {
         btn.innerText = "Скопировано!";
         setTimeout(() => btn.innerText = "Скопировать тикет", 2000);
     });
+
 }

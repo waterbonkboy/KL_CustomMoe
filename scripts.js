@@ -7,43 +7,43 @@ const DEFAULT_PLACEHOLDER = "assets/placeholder.png";
 
 const ENEMIES_BOSSES = [
     { id: "argenti", name: "Аргенти", icon: "assets/bosses/argenti.png", monster_id: 3024010, defaultLevel: 95 },
-    { id: "argenti_complete", name: "Аргенти (Complete)", icon: "assets/bosses/argenti.png", monster_id: 3024011, defaultLevel: 95 },
+    { id: "argenti_complete", name: "Аргенти (Complete)", icon: "assets/bosses/argenti_complete.png", monster_id: 3024011, defaultLevel: 95 },
     { id: "kafka", name: "Кафка", icon: "assets/bosses/kafka.png", monster_id: 2004010, defaultLevel: 95 },
-    { id: "kafka_complete", name: "Кафка (Complete)", icon: "assets/bosses/kafka.png", monster_id: 2004011, defaultLevel: 95 },
-    { id: "kafka_illusory", name: "Кафка Иллюзорная", icon: "assets/bosses/kafka.png", monster_id: 2004013, defaultLevel: 95 },
+    { id: "kafka_complete", name: "Кафка (Complete)", icon: "assets/bosses/kafka_complete.png", monster_id: 2004011, defaultLevel: 95 },
+    { id: "kafka_illusory", name: "Кафка Иллюзорная", icon: "assets/bosses/kafka_illusory.png", monster_id: 2004013, defaultLevel: 95 },
     { id: "sem_roya", name: "Сэм Роя", icon: "assets/bosses/sem_roya.png", monster_id: 3024030, defaultLevel: 95 },
     { id: "bronya", name: "Броня", icon: "assets/bosses/bronya.png", monster_id: 100403003, defaultLevel: 95 },
-    { id: "bronya_illusory", name: "Броня Иллюзорная", icon: "assets/bosses/bronya.png", monster_id: 1004032, defaultLevel: 95 },
+    { id: "bronya_illusory", name: "Броня Иллюзорная", icon: "assets/bosses/bronya_illusory.png", monster_id: 1004032, defaultLevel: 95 },
     { id: "avantyurin", name: "Авантюрин", icon: "assets/bosses/avantyurin.png", monster_id: 8034010, defaultLevel: 95 },
-    { id: "avantyurin_complete", name: "Авантюрин (Complete)", icon: "assets/bosses/avantyurin.png", monster_id: 8034011, defaultLevel: 95 },
+    { id: "avantyurin_complete", name: "Авантюрин (Complete)", icon: "assets/bosses/avantyurin_complete.png", monster_id: 8034011, defaultLevel: 95 },
     { id: "kokoliya", name: "Коколия", icon: "assets/bosses/kokoliya.png", monster_id: 1004013, defaultLevel: 95 },
     { id: "gepard", name: "Гепард", icon: "assets/bosses/gepard.png", monster_id: 1004020, defaultLevel: 95 },
-    { id: "gepard_complete", name: "Гепард (Complete)", icon: "assets/bosses/gepard.png", monster_id: 1004022, defaultLevel: 95 },
-    { id: "gepard_illusory", name: "Гепард Иллюзорный", icon: "assets/bosses/gepard.png", monster_id: 1004024, defaultLevel: 95 },
+    { id: "gepard_complete", name: "Гепард (Complete)", icon: "assets/bosses/gepard_complete.png", monster_id: 1004022, defaultLevel: 95 },
+    { id: "gepard_illusory", name: "Гепард Иллюзорный", icon: "assets/bosses/gepard_illusory.png", monster_id: 1004024, defaultLevel: 95 },
     { id: "haul", name: "Хауль", icon: "assets/bosses/haul.png", monster_id: 2034010, defaultLevel: 95 },
-    { id: "haul_complete", name: "Хауль (Complete)", icon: "assets/bosses/haul.png", monster_id: 203401201, defaultLevel: 95 },
-    { id: "haul_dirty", name: "Хауль Грязный", icon: "assets/bosses/haul.png", monster_id: 2034015, defaultLevel: 95 },
+    { id: "haul_complete", name: "Хауль (Complete)", icon: "assets/bosses/haul_complete.png", monster_id: 203401201, defaultLevel: 95 },
+    { id: "haul_dirty", name: "Хауль Грязный", icon: "assets/bosses/haul_dirty.png", monster_id: 2034015, defaultLevel: 95 },
     { id: "temnyy_rytsar", name: "Темный Рыцарь", icon: "assets/bosses/temnyy_rytsar.png", monster_id: 4034010, defaultLevel: 95 },
     { id: "manekeny", name: "Манекены", icon: "assets/bosses/manekeny.png", monster_id: 3004012, defaultLevel: 95 },
-    { id: "manekeny_complete", name: "Манекены (Complete)", icon: "assets/bosses/manekeny.png", monster_id: 3004013, defaultLevel: 95 },
+    { id: "manekeny_complete", name: "Манекены (Complete)", icon: "assets/bosses/manekeny_complete.png", monster_id: 3004013, defaultLevel: 95 },
     { id: "duh_pamyati", name: "Дух Памяти", icon: "assets/bosses/duh_pamyati.png", monster_id: 4064010, defaultLevel: 95 },
-    { id: "duh_pamyati_complete", name: "Дух Памяти (Complete)", icon: "assets/bosses/duh_pamyati.png", monster_id: 4064011, defaultLevel: 95 },
+    { id: "duh_pamyati_complete", name: "Дух Памяти (Complete)", icon: "assets/bosses/duh_pamyati_complete.png", monster_id: 4064011, defaultLevel: 95 },
     { id: "bezumnyy_korol", name: "Безумный Король", icon: "assets/bosses/bezumnyy_korol.png", monster_id: 4014010, defaultLevel: 95 },
-    { id: "bezumnyy_korol_complete", name: "Безумный Король (Complete)", icon: "assets/bosses/bezumnyy_korol.png", monster_id: 4014015, defaultLevel: 95 },
+    { id: "bezumnyy_korol_complete", name: "Безумный Король (Complete)", icon: "assets/bosses/bezumnyy_korol_complete.png", monster_id: 4014015, defaultLevel: 95 },
     { id: "mem_zony", name: "Мем Зоны", icon: "assets/bosses/mem_zony.png", monster_id: 3014020, defaultLevel: 95 },
-    { id: "mem_zony_complete", name: "Мем Зоны (Complete)", icon: "assets/bosses/mem_zony.png", monster_id: 3014022, defaultLevel: 95 },
+    { id: "mem_zony_complete", name: "Мем Зоны (Complete)", icon: "assets/bosses/mem_zony_complete.png", monster_id: 3014022, defaultLevel: 95 },
     { id: "olen", name: "Олень", icon: "assets/bosses/olen.png", monster_id: 2024010, defaultLevel: 95 },
-    { id: "olen_complete", name: "Олень (Complete)", icon: "assets/bosses/olen.png", monster_id: 2024011, defaultLevel: 95 },
-    { id: "olen_illusory", name: "Олень Иллюзорный", icon: "assets/bosses/olen.png", monster_id: 2024013, defaultLevel: 95 },
+    { id: "olen_complete", name: "Олень (Complete)", icon: "assets/bosses/olen_complete.png", monster_id: 2024011, defaultLevel: 95 },
+    { id: "olen_illusory", name: "Олень Иллюзорный", icon: "assets/bosses/olen_illusory.png", monster_id: 2024013, defaultLevel: 95 },
     { id: "pollyuks", name: "Поллюкс", icon: "assets/bosses/pollyuks.png", monster_id: 4014030, defaultLevel: 95 },
-    { id: "pollyuks_complete", name: "Поллюкс (Complete)", icon: "assets/bosses/pollyuks.png", monster_id: 4014031, defaultLevel: 95 },
+    { id: "pollyuks_complete", name: "Поллюкс (Complete)", icon: "assets/bosses/pollyuks_complete.png", monster_id: 4014031, defaultLevel: 95 },
     { id: "sem", name: "Сэм", icon: "assets/bosses/sem.png", monster_id: 3024020, defaultLevel: 95 },
-    { id: "sem_complete", name: "Сэм (Complete)", icon: "assets/bosses/sem.png", monster_id: 3024023, defaultLevel: 95 },
+    { id: "sem_complete", name: "Сэм (Complete)", icon: "assets/bosses/sem_complete.png", monster_id: 3024023, defaultLevel: 95 },
     { id: "iskra_offishal", name: "Искра Оффишал", icon: "assets/bosses/iskra_offishal.png", monster_id: 5014010, defaultLevel: 95 },
     { id: "svarog", name: "Сварог", icon: "assets/bosses/svarog.png", monster_id: 1014010, defaultLevel: 95 },
-    { id: "svarog_complete", name: "Сварог (Complete)", icon: "assets/bosses/svarog.png", monster_id: 1014011, defaultLevel: 95 },
+    { id: "svarog_complete", name: "Сварог (Complete)", icon: "assets/bosses/svarog_complete.png", monster_id: 1014011, defaultLevel: 95 },
     { id: "televizory", name: "Телевизоры", icon: "assets/bosses/televizory.png", monster_id: 3004020, defaultLevel: 95 },
-    { id: "televizory_complete", name: "Телевизоры (Complete)", icon: "assets/bosses/televizory.png", monster_id: 3004022, defaultLevel: 95 },
+    { id: "televizory_complete", name: "Телевизоры (Complete)", icon: "assets/bosses/televizory_complete.png", monster_id: 3004022, defaultLevel: 95 },
     { id: "zandar", name: "Зандар", icon: "assets/bosses/zandar.png", monster_id: 4044010, defaultLevel: 95 }
 ];
 
@@ -144,12 +144,12 @@ const LOCKED_CHARACTERS = [
 const SPECIAL_CHALLENGES = [
     { id: "sc_giga_trash", name: "Гига чат: Мусорный бак", price_rub: 20, description: "Добавляет особого противника: мусорный бак с 2 000 000 HP.", effect: { type: "spawn_special", hp: 2000000 } },
     { id: "sc_double_hp_all", name: "Удвоить HP всем противникам", price_rub: 200, description: "Повышает HP всем противникам в 2 раза.", effect: { type: "mult_hp_all", multiplier: 2 } },
-    { id: "sc_olezha_27", name: "Олежа 27", price_rub: 200, description: "20 волн светофоров ???", effect: { type: "custom_note", note: "20 волн светофоров ???" } },
+    { id: "sc_olezha_27", name: "Олежа 27", price_rub: 20, description: "20 волн светофоров ???", effect: { type: "custom_note", note: "20 волн светофоров ???" } },
     { id: "sc_hayato_live", name: "Хаято живи", price_rub: 30, description: "Добавить Жуань Мэй в команду и не дать ей погибнуть.", effect: { type: "mission", required_character_id: "ruan_mei", condition: "survive" } },
     { id: "sc_winter_falls", name: "Винтер Фолс", price_rub: 20, description: "Добавить Март 7 в отряд.", effect: { type: "force_character", character_id: "march_7" } },
-    { id: "sc_milo", name: "Злой Майло", price_rub: 80, description: "убрать 1 персонажа из отряда", effect: { type: "force_character", character_id: "march_7" } },
     { id: "sc_kindergarten_sun", name: "Детский Садик: Солнышко", price_rub: 100, description: "Использовать на уровне только мелких персонажей.", effect: { type: "rule", rule: "only_small_characters" } },
-    { id: "sc_factions_one", name: "Фракции: одна на выбор", price_rub: 100, description: "Можно использовать только одну фракцию на выбор.", effect: { type: "choose_one_faction", options: ["Лофу", "Сяньчжоу", "Станция Герта", "Златиусы", "Другое"] } }
+    { id: "sc_factions_one", name: "Фракции: одна на выбор", price_rub: 100, description: "Можно использовать только одну фракцию на выбор.", effect: { type: "choose_one_faction", options: ["Лофу", "Сяньчжоу", "Станция Герта", "Златиусы", "Другое"] } },
+    { id: "sc_angry_milo", name: "Злой Майло", price_rub: 80, description: "Пройти уровень без 1 персонажа (один слот команды недоступен).", effect: { type: "team_restriction", disabled_slots: 1 } }
 ];
 
 // --- СОСТОЯНИЕ ПРИЛОЖЕНИЯ ---
@@ -211,7 +211,14 @@ function updateActiveModifiersBanner() {
             const ch = SPECIAL_CHALLENGES.find(c => c.id === id);
             return ch ? ch.name : id;
         }).join(' • ');
-        textSpan.innerText = activeNames;
+        
+        // Предупреждение для "Злого Майло"
+        if (state.challenges.active.includes('sc_angry_milo')) {
+            textSpan.innerHTML = activeNames + ' <span style="color: #ff4757; margin-left: 10px;">⚠ Один слот персонажа заблокирован (Злой Майло)</span>';
+        } else {
+            textSpan.innerText = activeNames;
+        }
+        
         banner.style.display = 'block';
     } else {
         banner.style.display = 'none';
@@ -691,7 +698,7 @@ function setupEventListeners() {
     });
 }
 
-// --- ИМПОРТ / ЭКСПОРТ / СОХРАНЕНИЕ В НОВОМ ФОРМАТЕ BATTLE_CONFIG ---
+// --- ИМПОРТ / ЭКСПОРТ / СОХРАНЕНИЕ ---
 function buildExportPayload() {
     return {
         level_name: state.levelName,
@@ -762,7 +769,6 @@ function restoreStateFromJson(parsed) {
 
 function exportJson() {
     const payload = buildExportPayload();
-    // Сохраняем кастомный пул врагов отдельно в файл, чтобы при передаче не терялись картинки кастомных врагов
     const exportData = {
         ...payload,
         customPool: customEnemiesPool 
@@ -851,7 +857,6 @@ async function sendLevel() {
     }
 
     const payload = buildExportPayload();
-    // Прикрепляем кастомный пул для облака
     const exportData = {
         ...payload,
         customPool: customEnemiesPool 
@@ -935,6 +940,6 @@ function copyTicket() {
         btn.innerText = "Скопировано!";
         setTimeout(() => btn.innerText = "Скопировать тикет", 2000);
     });
-
 }
+
 

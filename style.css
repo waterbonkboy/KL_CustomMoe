@@ -213,7 +213,7 @@ body {
 .btn-remove-enemy:hover { color: var(--danger); }
 
 .add-enemy-btn {
-    width: 100px; height: 125px;
+    width: 100px; height: 135px; /* Немного увеличено для 2 инпутов */
     border: 2px dashed var(--glass-border);
     background: transparent; border-radius: 8px;
     color: var(--text-muted); font-size: 24px; cursor: pointer;

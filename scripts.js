@@ -3,6 +3,7 @@
 const API_BASE = "https://custom-level-api.likirill.workers.dev";
 
 // --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
+// --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
 // CHANGE: Обновлен путь к плейсхолдеру при ошибке загрузки картинки
 const DEFAULT_PLACEHOLDER = "assets/placeholder.png";
 
@@ -33,7 +34,6 @@ const ENEMIES_BOSSES = [
 
 ];
 
-// CHANGE: Полностью заменен пул еженедельных боссов
 const ENEMIES_WEEKLY = [
     { id: "zver_sudnogo_dnya", name: "Зверь Судного Дня", icon: "assets/weekly/zver_sudnogo_dnya.png", element: null, tags: [], defaultLevel: 95 },
     { id: "bolshaya_mama_kokoliya", name: "Большая Мама Коколия", icon: "assets/weekly/bolshaya_mama_kokoliya.png", element: null, tags: [], defaultLevel: 95 },

@@ -3,16 +3,41 @@
 const API_BASE = "https://custom-level-api.likirill.workers.dev";
 
 // --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
-const DEFAULT_PLACEHOLDER = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='64' height='64' fill='%232d3436'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='%23636e72' dominant-baseline='middle' text-anchor='middle'>?</text></svg>";
+const DEFAULT_PLACEHOLDER = "assets/placeholder.png";
 
 const ENEMIES_BOSSES = [
-    { id: "boss_01", name: "Stellar Devourer", element: "Physical", defaultLevel: 95, icon: "assets/enemies/boss_stellar.png" },
-    { id: "boss_02", name: "Void Knight", element: "Electro", defaultLevel: 90, icon: "assets/enemies/boss_void.png" }
+    { id: "argenti", name: "Аргенти", icon: "assets/bosses/argenti.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "semroya", name: "СэмРоя", icon: "assets/bosses/semroya.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "bronya", name: "Броня", icon: "assets/bosses/bronya.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "avantyurin", name: "Авантюрин", icon: "assets/bosses/avantyurin.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "kokoliya", name: "Коколия", icon: "assets/bosses/kokoliya.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "glaz", name: "Глаз", icon: "assets/bosses/glaz.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "gepard", name: "Гепард", icon: "assets/bosses/gepard.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "haul", name: "Хауль", icon: "assets/bosses/haul.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "kafka", name: "Кафка", icon: "assets/bosses/kafka.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "temnyy_rytsar", name: "Темный Рыцарь", icon: "assets/bosses/temnyy_rytsar.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "manekeny", name: "Манекены", icon: "assets/bosses/manekeny.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "duh_pamyati", name: "Дух Памяти", icon: "assets/bosses/duh_pamyati.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "bezumnyy_korol_razdora", name: "Безумный Король раздора", icon: "assets/bosses/bezumnyy_korol_razdora.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "mem_zony", name: "Мем Зоны", icon: "assets/bosses/mem_zony.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "olen", name: "Олень", icon: "assets/bosses/olen.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "pollyuks", name: "Поллюкс", icon: "assets/bosses/pollyuks.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "sem", name: "Сэм", icon: "assets/bosses/sem.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "iskra_offishal", name: "Искра Оффишал", icon: "assets/bosses/iskra_offishal.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "svarog", name: "Сварог", icon: "assets/bosses/svarog.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "televizory", name: "Телевизоры", icon: "assets/bosses/televizory.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "zandar", name: "Зандар", icon: "assets/bosses/zandar.png", element: null, tags: [], defaultLevel: 95 }
 ];
 
 const ENEMIES_WEEKLY = [
-    { id: "week_01", name: "Abyssal Dragon", element: "Water", defaultLevel: 95, icon: "assets/enemies/week_dragon.png" },
-    { id: "week_02", name: "Crimson Witch", element: "Fire", defaultLevel: 95, icon: "assets/enemies/week_witch.png" }
+    { id: "zver_sudnogo_dnya", name: "Зверь Судного Дня", icon: "assets/weekly/zver_sudnogo_dnya.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "bolshaya_mama_kokoliya", name: "Большая Мама Коколия", icon: "assets/weekly/bolshaya_mama_kokoliya.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "fantiliya", name: "Фантилия", icon: "assets/weekly/fantiliya.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "korolevskiy_zhuk", name: "Королевский Жук", icon: "assets/weekly/korolevskiy_zhuk.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "voskresene", name: "Воскресенье", icon: "assets/weekly/voskresene.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "ten_fey_syao", name: "Тень Фэй Сяо", icon: "assets/weekly/ten_fey_syao.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "akvila", name: "Аквила", icon: "assets/weekly/akvila.png", element: null, tags: [], defaultLevel: 95 },
+    { id: "stalesklep", name: "Сталесклеп", icon: "assets/weekly/stalesklep.png", element: null, tags: [], defaultLevel: 95 }
 ];
 
 const CHARACTERS = [
@@ -64,7 +89,9 @@ function getImagePath(path) {
 }
 
 window.imgError = function(image) {
-    image.onerror = "";
+    // Предотвращаем бесконечный цикл, если плейсхолдер тоже не загрузился
+    if (image.src.includes(DEFAULT_PLACEHOLDER)) return true;
+    image.onerror = null;
     image.src = DEFAULT_PLACEHOLDER;
     return true;
 }
@@ -656,5 +683,4 @@ function copyTicket() {
         btn.innerText = "Copied!";
         setTimeout(() => btn.innerText = "Copy Ticket", 2000);
     });
-
 }

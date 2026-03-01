@@ -2,12 +2,10 @@
 // Обязательно замените этот URL на ваш реальный после деплоя воркера!
 const API_BASE = "https://custom-level-api.likirill.workers.dev";
 
+
 // --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
-// --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
-// CHANGE: Обновлен путь к плейсхолдеру при ошибке загрузки картинки
 const DEFAULT_PLACEHOLDER = "assets/placeholder.png";
 
-// CHANGE: Полностью заменен пул обычных боссов
 const ENEMIES_BOSSES = [
     { id: "argenti", name: "Аргенти", icon: "assets/bosses/argenti.png", element: null, tags: [], defaultLevel: 95 },
     { id: "semroya", name: "СэмРоя", icon: "assets/bosses/semroya.png", element: null, tags: [], defaultLevel: 95 },
@@ -29,9 +27,7 @@ const ENEMIES_BOSSES = [
     { id: "iskra_offishal", name: "Искра Оффишал", icon: "assets/bosses/iskra_offishal.png", element: null, tags: [], defaultLevel: 95 },
     { id: "svarog", name: "Сварог", icon: "assets/bosses/svarog.png", element: null, tags: [], defaultLevel: 95 },
     { id: "televizory", name: "Телевизоры", icon: "assets/bosses/televizory.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "yan", name: "ЯньЦин", icon: "assets/bosses/yan.png", element: null, tags: [], defaultLevel: 95 },
     { id: "zandar", name: "Зандар", icon: "assets/bosses/zandar.png", element: null, tags: [], defaultLevel: 95 }
-
 ];
 
 const ENEMIES_WEEKLY = [
@@ -115,22 +111,32 @@ const OWNED_CHARACTERS = [
 ];
 
 const LOCKED_CHARACTERS = [
-    { id: "example_locked", name: "Скрытый Герой", icon: "assets/chars/example.png" }
+    { id:"luocha", name:"Лоча", icon:"assets/chars/luocha.png" },
+    { id:"dan_heng_il", name:"Дань Хэн Пожиратель Луны", icon:"assets/chars/dan_heng_il.png" },
+    { id:"jiaoqiu", name:"Цзяоцю", icon:"assets/chars/jiaoqiu.png" },
+    { id:"argenti", name:"Аргенти", icon:"assets/chars/argenti.png" },
+    { id:"jade", name:"Яшма", icon:"assets/chars/jade.png" },
+    { id:"boothill", name:"Бутхилл", icon:"assets/chars/boothill.png" },
+    { id:"rappa", name:"Раппа", icon:"assets/chars/rappa.png" },
+    { id:"great_herta", name:"Великая Герта", icon:"assets/chars/great_herta.png" },
+    { id:"midei", name:"Мидей", icon:"assets/chars/midei.png" },
+    { id:"anaksa", name:"Анакса", icon:"assets/chars/anaksa.png" },
+    { id:"gisilensa", name:"Гисиленса", icon:"assets/chars/gisilensa.png" }
 ];
 
 const SPECIAL_CHALLENGES = [
-    {
-        id: "sc_giga_trash",
-        name: "ГИГА ЧАТ МУСОРНЫЙ БАК",
-        price: "499₸",
-        description: "Мусорный бак с 2 000 000 HP. Появляется как особый противник/ивент.",
-        effect: { type: "spawn_special", hp: 2000000 }
-    }
+    { id: "sc_giga_trash", name: "Гига чат: Мусорный бак", price_rub: 20, description: "Добавляет особого противника: мусорный бак с 2 000 000 HP.", effect: { type: "spawn_special", hp: 2000000 } },
+    { id: "sc_double_hp_all", name: "Удвоить HP всем противникам", price_rub: 200, description: "Повышает HP всем противникам в 2 раза.", effect: { type: "mult_hp_all", multiplier: 2 } },
+    { id: "sc_olezha_27", name: "Олежа 27", price_rub: 200, description: "20 волн светофоров ???", effect: { type: "custom_note", note: "20 волн светофоров ???" } },
+    { id: "sc_hayato_live", name: "Хаято живи", price_rub: 30, description: "Добавить Жуань Мэй в команду и не дать ей погибнуть.", effect: { type: "mission", required_character_id: "ruan_mei", condition: "survive" } },
+    { id: "sc_winter_falls", name: "Винтер Фолс", price_rub: 20, description: "Добавить Март 7 в отряд.", effect: { type: "force_character", character_id: "march_7" } },
+    { id: "sc_kindergarten_sun", name: "Детский Садик: Солнышко", price_rub: 100, description: "Использовать на уровне только мелких персонажей.", effect: { type: "rule", rule: "only_small_characters" } },
+    { id: "sc_factions_one", name: "Фракции: одна на выбор", price_rub: 100, description: "Можно использовать только одну фракцию на выбор.", effect: { type: "choose_one_faction", options: ["Лофу", "Сяньчжоу", "Станция Герта", "Златиусы", "Другое"] } }
 ];
 
 // --- СОСТОЯНИЕ ПРИЛОЖЕНИЯ ---
 let state = {
-    levelName: "My Custom Level",
+    levelName: "Мой кастомный уровень",
     waves: [
         { enemies: [] }, { enemies: [] }, { enemies: [] }, { enemies: [] }
     ],
@@ -175,11 +181,26 @@ function renderAll() {
     renderCharacters();
     renderWaves();
     renderChallenges();
+    updateActiveModifiersBanner();
     triggerAutoSave();
 }
 
+function updateActiveModifiersBanner() {
+    const banner = document.getElementById('active-modifiers-banner');
+    const textSpan = document.getElementById('active-modifiers-text');
+    if (state.challenges.active.length > 0) {
+        const activeNames = state.challenges.active.map(id => {
+            const ch = SPECIAL_CHALLENGES.find(c => c.id === id);
+            return ch ? ch.name : id;
+        }).join(' • ');
+        textSpan.innerText = activeNames;
+        banner.style.display = 'block';
+    } else {
+        banner.style.display = 'none';
+    }
+}
+
 function renderCharacters() {
-    // 1. Рендер Banned Characters
     const bContainer = document.getElementById('banned-container');
     bContainer.innerHTML = '';
     
@@ -200,7 +221,11 @@ function renderCharacters() {
         bContainer.appendChild(slot);
     }
 
-    // 2. Рендер Unlocked Characters
+    const counterEl = document.getElementById('unlocked-counter');
+    if (counterEl) {
+        counterEl.innerText = `(Разблокировано: ${state.unlockedCharacters.length})`;
+    }
+
     const uContainer = document.getElementById('unlocked-container');
     uContainer.innerHTML = '';
     
@@ -239,7 +264,7 @@ function renderWaves() {
         
         const content = document.createElement('div');
         content.className = 'wave-content';
-        content.innerHTML = `<div class="wave-header"><h3>Wave ${wIndex + 1}</h3></div>`;
+        content.innerHTML = `<div class="wave-header"><h3>Волна ${wIndex + 1}</h3></div>`;
         
         const grid = document.createElement('div');
         grid.className = 'enemies-grid';
@@ -248,7 +273,7 @@ function renderWaves() {
             const eCard = document.createElement('div');
             eCard.className = 'enemy-card';
             eCard.innerHTML = `
-                <button class="btn-remove-enemy" onclick="removeEnemy(${wIndex}, ${eIndex})" title="Remove">✕</button>
+                <button class="btn-remove-enemy" onclick="removeEnemy(${wIndex}, ${eIndex})" title="Удалить">✕</button>
                 <img src="${getImagePath(enemy.icon)}" alt="${enemy.name}" onerror="imgError(this)">
                 <div class="name" title="${enemy.name}">${enemy.name}</div>
                 <input type="number" class="enemy-level" value="${enemy.level}" min="1" max="95" 
@@ -286,7 +311,7 @@ function addWave() {
 }
 
 function removeWave(index) {
-    if(confirm('Delete this wave?')) {
+    if(confirm('Удалить эту волну?')) {
         state.waves.splice(index, 1);
         renderAll();
     }
@@ -367,7 +392,7 @@ function renderEnemyPickerList() {
 
     grid.innerHTML = '';
     if (filtered.length === 0) {
-        grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1/-1;">No enemies found.</p>';
+        grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1/-1;">Противники не найдены.</p>';
         return;
     }
 
@@ -382,10 +407,10 @@ function renderEnemyPickerList() {
             <div class="name"><strong>${enemy.name}</strong></div>
             ${enemy.element ? `<div class="element">${enemy.element}</div>` : ''}
             <div class="level-selector">
-                <label>Level: <span id="${valId}">${enemy.defaultLevel}</span></label>
+                <label>Уровень: <span id="${valId}">${enemy.defaultLevel}</span></label>
                 <input type="range" id="${sliderId}" min="1" max="95" value="${enemy.defaultLevel}" class="level-slider" oninput="document.getElementById('${valId}').innerText = this.value">
             </div>
-            <button class="btn btn-primary w-100" onclick="handleAddEnemyFromPicker('${enemy.id}', '${enemy.name}', '${enemy.icon}', '${sliderId}')">Add</button>
+            <button class="btn btn-primary w-100" onclick="handleAddEnemyFromPicker('${enemy.id}', '${enemy.name}', '${enemy.icon}', '${sliderId}')">Добавить</button>
         `;
         grid.appendChild(card);
     });
@@ -415,7 +440,7 @@ function createCustomEnemy() {
     const element = document.getElementById('ce-element').value.trim();
     const icon = document.getElementById('ce-icon').value.trim();
 
-    if (!name) { alert("Please enter a name"); return; }
+    if (!name) { alert("Пожалуйста, введите имя"); return; }
 
     const newEnemy = {
         id: "custom_" + Date.now(),
@@ -440,11 +465,10 @@ function openCharacterPicker(mode, slotIndex = null) {
     currentActiveSlotIndex = slotIndex;
     
     const title = document.getElementById('char-picker-title');
-    title.innerText = mode === 'ban' ? 'Select Character to Ban' : 'Unlock Character';
+    title.innerText = mode === 'ban' ? 'Выбрать персонажа для бана' : 'Разблокировать персонажа';
     
-    // Показываем фильтр "Show banned" только для режима банов
     document.getElementById('label-filter-banned').style.display = mode === 'ban' ? 'flex' : 'none';
-    document.getElementById('char-filter-banned').checked = false; // сбрасываем фильтр
+    document.getElementById('char-filter-banned').checked = false; 
     
     document.getElementById('char-picker-modal').classList.remove('hidden');
     renderCharPickerList();
@@ -478,7 +502,7 @@ function renderCharPickerList() {
 
         const isAlreadyBanned = charPickerMode === 'ban' && state.bannedCharacters.some(bc => bc && bc.id === char.id);
         const btnClass = isAlreadyBanned ? 'btn-danger' : 'btn-primary';
-        const btnText = charPickerMode === 'ban' ? (isAlreadyBanned ? 'Banned' : 'Ban') : 'Unlock';
+        const btnText = charPickerMode === 'ban' ? (isAlreadyBanned ? 'Забанен' : 'Забанить') : 'Разблокировать';
 
         card.innerHTML = `
             <img src="${getImagePath(char.icon)}" alt="${char.name}" onerror="imgError(this)">
@@ -526,18 +550,21 @@ function renderChallenges() {
         
         let buttonHTML = '';
         if (!isUnlocked) {
-            buttonHTML = `<button class="btn btn-primary w-100" onclick="openPurchaseModal('${challenge.id}')">Unlock / Buy</button>`;
+            buttonHTML = `<button class="btn btn-primary w-100" onclick="openPurchaseModal('${challenge.id}')">Купить</button>`;
         } else if (isActive) {
-            buttonHTML = `<button class="btn btn-secondary w-100" onclick="toggleChallenge('${challenge.id}')">Deactivate</button>`;
+            buttonHTML = `
+                <div style="text-align:center; color: #4cd137; font-weight:bold; margin-bottom:5px;">Активно ✅</div>
+                <button class="btn btn-danger w-100" onclick="toggleChallenge('${challenge.id}')">Убрать</button>
+            `;
         } else {
-            buttonHTML = `<button class="btn btn-secondary w-100" style="border-color: var(--accent); color: var(--accent);" onclick="toggleChallenge('${challenge.id}')">Activate</button>`;
+            buttonHTML = `<button class="btn btn-secondary w-100" style="border-color: var(--accent); color: var(--accent);" onclick="toggleChallenge('${challenge.id}')">Активировать</button>`;
         }
 
         card.innerHTML = `
-            ${!isUnlocked ? `<div class="challenge-price">${challenge.price}</div>` : ''}
+            ${!isUnlocked ? `<div class="challenge-price">${challenge.price_rub} ₽</div>` : ''}
             <h4>${challenge.name}</h4>
             <p>${challenge.description}</p>
-            ${buttonHTML}
+            <div style="margin-top: auto;">${buttonHTML}</div>
         `;
         container.appendChild(card);
     });
@@ -548,7 +575,7 @@ function openPurchaseModal(challengeId) {
     if (!challenge) return;
     
     pendingPurchaseId = challengeId;
-    document.getElementById('purchase-text').innerHTML = `Unlock <strong>${challenge.name}</strong> for ${challenge.price}?`;
+    document.getElementById('purchase-text').innerHTML = `Разблокировать <strong>${challenge.name}</strong> за ${challenge.price_rub} ₽?`;
     document.getElementById('enemy-picker-modal').classList.add('hidden'); 
     document.getElementById('char-picker-modal').classList.add('hidden');
     document.getElementById('purchase-modal').classList.remove('hidden');
@@ -556,6 +583,9 @@ function openPurchaseModal(challengeId) {
     document.getElementById('btn-confirm-purchase').onclick = () => {
         if (pendingPurchaseId) {
             state.challenges.unlocked.push(pendingPurchaseId);
+            if (!state.challenges.active.includes(pendingPurchaseId)) {
+                state.challenges.active.push(pendingPurchaseId);
+            }
             closeModal('purchase-modal');
             renderAll();
         }
@@ -601,7 +631,7 @@ function setupEventListeners() {
 
     document.getElementById('char-search').addEventListener('input', renderCharPickerList);
     document.getElementById('char-sort').addEventListener('change', renderCharPickerList);
-    document.getElementById('char-filter-banned').addEventListener('change', renderCharPickerList); // Новый фильтр
+    document.getElementById('char-filter-banned').addEventListener('change', renderCharPickerList);
 
     document.getElementById('btn-export').addEventListener('click', exportJson);
     document.getElementById('btn-import').addEventListener('click', () => document.getElementById('import-file').click());
@@ -630,8 +660,15 @@ function setupEventListeners() {
 // --- ИМПОРТ / ЭКСПОРТ / СОХРАНЕНИЕ ---
 function exportJson() {
     state.meta.updatedAt = new Date().toISOString();
+    
+    const formattedActiveChallenges = state.challenges.active.map(id => {
+        const ch = SPECIAL_CHALLENGES.find(c => c.id === id);
+        return { id: id, effect: ch ? ch.effect : null };
+    });
+
     const exportData = {
         ...state,
+        activeChallenges: formattedActiveChallenges,
         customPool: customEnemiesPool 
     };
 
@@ -654,7 +691,7 @@ function importJson(event) {
             const parsed = JSON.parse(e.target.result);
             if (parsed.waves) {
                 state = {
-                    levelName: parsed.levelName || "Imported Level",
+                    levelName: parsed.levelName || "Импортированный уровень",
                     waves: parsed.waves,
                     bannedCharacters: parsed.bannedCharacters || parsed.party || [null, null, null, null],
                     unlockedCharacters: parsed.unlockedCharacters || [],
@@ -663,12 +700,12 @@ function importJson(event) {
                 };
                 customEnemiesPool = parsed.customPool || [];
                 renderAll();
-                alert("Level imported successfully!");
+                alert("Уровень успешно импортирован!");
             } else {
-                alert("Invalid JSON format");
+                alert("Неверный формат JSON");
             }
         } catch (error) {
-            alert("Error parsing JSON");
+            alert("Ошибка при разборе JSON");
         }
     };
     reader.readAsText(file);
@@ -676,9 +713,9 @@ function importJson(event) {
 }
 
 function resetLevel() {
-    if(confirm("Are you sure you want to reset everything?")) {
+    if(confirm("Вы уверены, что хотите сбросить весь прогресс?")) {
         state = {
-            levelName: "My Custom Level",
+            levelName: "Мой кастомный уровень",
             waves: [{ enemies: [] }, { enemies: [] }, { enemies: [] }, { enemies: [] }],
             bannedCharacters: [null, null, null, null],
             unlockedCharacters: [],
@@ -709,7 +746,6 @@ function loadState() {
             if (savedData) {
                 const parsed = JSON.parse(savedData);
                 state = parsed.state;
-                // Восстановление обратной совместимости
                 if (!state.bannedCharacters && state.party) {
                     state.bannedCharacters = state.party;
                     state.unlockedCharacters = [];
@@ -718,7 +754,7 @@ function loadState() {
             }
         }
     } catch (e) {
-        console.error("Failed to load state", e);
+        console.error("Ошибка загрузки сохранений", e);
     }
 }
 
@@ -726,13 +762,20 @@ function loadState() {
 async function sendLevel() {
     const hasEnemies = state.waves.some(w => w.enemies && w.enemies.length > 0);
     if (!hasEnemies) {
-        alert("Cannot send an empty level! Add some enemies first.");
+        alert("Нельзя отправить пустой уровень! Добавьте противников.");
         return;
     }
 
     state.meta.updatedAt = new Date().toISOString();
+    
+    const formattedActiveChallenges = state.challenges.active.map(id => {
+        const ch = SPECIAL_CHALLENGES.find(c => c.id === id);
+        return { id: id, effect: ch ? ch.effect : null };
+    });
+
     const exportData = {
         ...state,
+        activeChallenges: formattedActiveChallenges,
         customPool: customEnemiesPool 
     };
 
@@ -740,13 +783,13 @@ async function sendLevel() {
     
     const sizeInBytes = new Blob([jsonStr]).size;
     if (sizeInBytes > 50 * 1024) {
-        alert("Level file is too large! Maximum allowed size is 50KB.");
+        alert("Размер файла слишком большой! Максимум 50KB.");
         return;
     }
 
     const btn = document.getElementById('btn-send-level');
     const originalText = btn.innerText;
-    btn.innerText = "Sending...";
+    btn.innerText = "Отправка...";
     btn.disabled = true;
 
     try {
@@ -756,14 +799,14 @@ async function sendLevel() {
             body: jsonStr
         });
 
-        if (!response.ok) throw new Error("Server rejected the level");
+        if (!response.ok) throw new Error("Сервер отклонил уровень");
 
         const data = await response.json();
         
         document.getElementById('ticket-display').innerText = data.ticket;
         document.getElementById('ticket-modal').classList.remove('hidden');
     } catch (error) {
-        alert("Failed to send level: " + error.message);
+        alert("Ошибка отправки уровня: " + error.message);
     } finally {
         btn.innerText = originalText;
         btn.disabled = false;
@@ -775,7 +818,7 @@ async function findLevelByTicket() {
     const ticket = input.value.trim().toUpperCase();
 
     if (!ticket) {
-        alert("Please enter a valid ticket (e.g. LVL-XXXXXX)");
+        alert("Введите корректный тикет (напр. LVL-XXXXXX)");
         return;
     }
 
@@ -788,16 +831,16 @@ async function findLevelByTicket() {
         const response = await fetch(`${API_BASE}/levels/${ticket}`);
         
         if (response.status === 404) {
-            alert("Ticket not found or has expired.");
+            alert("Тикет не найден или истек срок действия.");
             return;
         }
-        if (!response.ok) throw new Error("Failed to fetch level");
+        if (!response.ok) throw new Error("Ошибка загрузки уровня");
 
         const parsed = await response.json();
 
         if (parsed.waves) {
             state = {
-                levelName: parsed.levelName || "Imported Level",
+                levelName: parsed.levelName || "Импортированный уровень",
                 waves: parsed.waves,
                 bannedCharacters: parsed.bannedCharacters || parsed.party || [null, null, null, null],
                 unlockedCharacters: parsed.unlockedCharacters || [],
@@ -805,14 +848,21 @@ async function findLevelByTicket() {
                 meta: parsed.meta || state.meta
             };
             customEnemiesPool = parsed.customPool || [];
+            
+            // Восстановление активных модификаторов из формата объекта обратно в список ID
+            if (parsed.activeChallenges && Array.isArray(parsed.activeChallenges)) {
+                state.challenges.active = parsed.activeChallenges.map(ch => ch.id);
+                state.challenges.unlocked = [...new Set([...state.challenges.unlocked, ...state.challenges.active])];
+            }
+
             renderAll();
-            alert(`Level "${state.levelName}" loaded successfully!`);
+            alert(`Уровень "${state.levelName}" успешно загружен!`);
             input.value = ''; 
         } else {
-            alert("Downloaded data is corrupted or invalid.");
+            alert("Загруженные данные повреждены или неверны.");
         }
     } catch (error) {
-        alert("Error loading level: " + error.message);
+        alert("Ошибка загрузки уровня: " + error.message);
     } finally {
         btn.innerText = originalText;
         btn.disabled = false;
@@ -823,8 +873,7 @@ function copyTicket() {
     const ticketText = document.getElementById('ticket-display').innerText;
     navigator.clipboard.writeText(ticketText).then(() => {
         const btn = document.getElementById('btn-copy-ticket');
-        btn.innerText = "Copied!";
-        setTimeout(() => btn.innerText = "Copy Ticket", 2000);
+        btn.innerText = "Скопировано!";
+        setTimeout(() => btn.innerText = "Скопировать тикет", 2000);
     });
-
 }

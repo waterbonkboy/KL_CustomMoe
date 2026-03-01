@@ -1,44 +1,61 @@
-// Настройки API для Cloudflare Worker
-// Обязательно замените этот URL на ваш реальный после деплоя воркера!
+/ Настройки API для Cloudflare Worker
+// ВАЖНО: Убедись, что тут стоит твоя ссылка на Worker!
 const API_BASE = "https://custom-level-api.likirill.workers.dev";
-
 
 // --- БАЗА ДАННЫХ (Пулы по умолчанию) ---
 const DEFAULT_PLACEHOLDER = "assets/placeholder.png";
 
 const ENEMIES_BOSSES = [
-    { id: "argenti", name: "Аргенти", icon: "assets/bosses/argenti.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "semroya", name: "СэмРоя", icon: "assets/bosses/semroya.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "bronya", name: "Броня", icon: "assets/bosses/bronya.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "avantyurin", name: "Авантюрин", icon: "assets/bosses/avantyurin.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "kokoliya", name: "Коколия", icon: "assets/bosses/kokoliya.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "glaz", name: "Глаз", icon: "assets/bosses/glaz.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "gepard", name: "Гепард", icon: "assets/bosses/gepard.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "haul", name: "Хауль", icon: "assets/bosses/haul.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "kafka", name: "Кафка", icon: "assets/bosses/kafka.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "temnyy_rytsar", name: "Темный Рыцарь", icon: "assets/bosses/temnyy_rytsar.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "manekeny", name: "Манекены", icon: "assets/bosses/manekeny.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "duh_pamyati", name: "Дух Памяти", icon: "assets/bosses/duh_pamyati.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "bezumnyy_korol_razdora", name: "Безумный Король раздора", icon: "assets/bosses/bezumnyy_korol_razdora.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "mem_zony", name: "Мем Зоны", icon: "assets/bosses/mem_zony.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "olen", name: "Олень", icon: "assets/bosses/olen.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "pollyuks", name: "Поллюкс", icon: "assets/bosses/pollyuks.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "sem", name: "Сэм", icon: "assets/bosses/sem.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "iskra_offishal", name: "Искра Оффишал", icon: "assets/bosses/iskra_offishal.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "svarog", name: "Сварог", icon: "assets/bosses/svarog.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "televizory", name: "Телевизоры", icon: "assets/bosses/televizory.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "zandar", name: "Зандар", icon: "assets/bosses/zandar.png", element: null, tags: [], defaultLevel: 95 }
+    { id: "argenti", name: "Аргенти", icon: "assets/bosses/argenti.png", monster_id: 3024010, defaultLevel: 95 },
+    { id: "argenti_complete", name: "Аргенти (Complete)", icon: "assets/bosses/argenti.png", monster_id: 3024011, defaultLevel: 95 },
+    { id: "kafka", name: "Кафка", icon: "assets/bosses/kafka.png", monster_id: 2004010, defaultLevel: 95 },
+    { id: "kafka_complete", name: "Кафка (Complete)", icon: "assets/bosses/kafka.png", monster_id: 2004011, defaultLevel: 95 },
+    { id: "kafka_illusory", name: "Кафка Иллюзорная", icon: "assets/bosses/kafka.png", monster_id: 2004013, defaultLevel: 95 },
+    { id: "sem_roya", name: "Сэм Роя", icon: "assets/bosses/sem_roya.png", monster_id: 3024030, defaultLevel: 95 },
+    { id: "bronya", name: "Броня", icon: "assets/bosses/bronya.png", monster_id: 100403003, defaultLevel: 95 },
+    { id: "bronya_illusory", name: "Броня Иллюзорная", icon: "assets/bosses/bronya.png", monster_id: 1004032, defaultLevel: 95 },
+    { id: "avantyurin", name: "Авантюрин", icon: "assets/bosses/avantyurin.png", monster_id: 8034010, defaultLevel: 95 },
+    { id: "avantyurin_complete", name: "Авантюрин (Complete)", icon: "assets/bosses/avantyurin.png", monster_id: 8034011, defaultLevel: 95 },
+    { id: "kokoliya", name: "Коколия", icon: "assets/bosses/kokoliya.png", monster_id: 1004013, defaultLevel: 95 },
+    { id: "gepard", name: "Гепард", icon: "assets/bosses/gepard.png", monster_id: 1004020, defaultLevel: 95 },
+    { id: "gepard_complete", name: "Гепард (Complete)", icon: "assets/bosses/gepard.png", monster_id: 1004022, defaultLevel: 95 },
+    { id: "gepard_illusory", name: "Гепард Иллюзорный", icon: "assets/bosses/gepard.png", monster_id: 1004024, defaultLevel: 95 },
+    { id: "haul", name: "Хауль", icon: "assets/bosses/haul.png", monster_id: 2034010, defaultLevel: 95 },
+    { id: "haul_complete", name: "Хауль (Complete)", icon: "assets/bosses/haul.png", monster_id: 203401201, defaultLevel: 95 },
+    { id: "haul_dirty", name: "Хауль Грязный", icon: "assets/bosses/haul.png", monster_id: 2034015, defaultLevel: 95 },
+    { id: "temnyy_rytsar", name: "Темный Рыцарь", icon: "assets/bosses/temnyy_rytsar.png", monster_id: 4034010, defaultLevel: 95 },
+    { id: "manekeny", name: "Манекены", icon: "assets/bosses/manekeny.png", monster_id: 3004012, defaultLevel: 95 },
+    { id: "manekeny_complete", name: "Манекены (Complete)", icon: "assets/bosses/manekeny.png", monster_id: 3004013, defaultLevel: 95 },
+    { id: "duh_pamyati", name: "Дух Памяти", icon: "assets/bosses/duh_pamyati.png", monster_id: 4064010, defaultLevel: 95 },
+    { id: "duh_pamyati_complete", name: "Дух Памяти (Complete)", icon: "assets/bosses/duh_pamyati.png", monster_id: 4064011, defaultLevel: 95 },
+    { id: "bezumnyy_korol", name: "Безумный Король", icon: "assets/bosses/bezumnyy_korol.png", monster_id: 4014010, defaultLevel: 95 },
+    { id: "bezumnyy_korol_complete", name: "Безумный Король (Complete)", icon: "assets/bosses/bezumnyy_korol.png", monster_id: 4014015, defaultLevel: 95 },
+    { id: "mem_zony", name: "Мем Зоны", icon: "assets/bosses/mem_zony.png", monster_id: 3014020, defaultLevel: 95 },
+    { id: "mem_zony_complete", name: "Мем Зоны (Complete)", icon: "assets/bosses/mem_zony.png", monster_id: 3014022, defaultLevel: 95 },
+    { id: "olen", name: "Олень", icon: "assets/bosses/olen.png", monster_id: 2024010, defaultLevel: 95 },
+    { id: "olen_complete", name: "Олень (Complete)", icon: "assets/bosses/olen.png", monster_id: 2024011, defaultLevel: 95 },
+    { id: "olen_illusory", name: "Олень Иллюзорный", icon: "assets/bosses/olen.png", monster_id: 2024013, defaultLevel: 95 },
+    { id: "pollyuks", name: "Поллюкс", icon: "assets/bosses/pollyuks.png", monster_id: 4014030, defaultLevel: 95 },
+    { id: "pollyuks_complete", name: "Поллюкс (Complete)", icon: "assets/bosses/pollyuks.png", monster_id: 4014031, defaultLevel: 95 },
+    { id: "sem", name: "Сэм", icon: "assets/bosses/sem.png", monster_id: 3024020, defaultLevel: 95 },
+    { id: "sem_complete", name: "Сэм (Complete)", icon: "assets/bosses/sem.png", monster_id: 3024023, defaultLevel: 95 },
+    { id: "iskra_offishal", name: "Искра Оффишал", icon: "assets/bosses/iskra_offishal.png", monster_id: 5014010, defaultLevel: 95 },
+    { id: "svarog", name: "Сварог", icon: "assets/bosses/svarog.png", monster_id: 1014010, defaultLevel: 95 },
+    { id: "svarog_complete", name: "Сварог (Complete)", icon: "assets/bosses/svarog.png", monster_id: 1014011, defaultLevel: 95 },
+    { id: "televizory", name: "Телевизоры", icon: "assets/bosses/televizory.png", monster_id: 3004020, defaultLevel: 95 },
+    { id: "televizory_complete", name: "Телевизоры (Complete)", icon: "assets/bosses/televizory.png", monster_id: 3004022, defaultLevel: 95 },
+    { id: "zandar", name: "Зандар", icon: "assets/bosses/zandar.png", monster_id: 4044010, defaultLevel: 95 }
 ];
 
 const ENEMIES_WEEKLY = [
-    { id: "zver_sudnogo_dnya", name: "Зверь Судного Дня", icon: "assets/weekly/zver_sudnogo_dnya.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "bolshaya_mama_kokoliya", name: "Большая Мама Коколия", icon: "assets/weekly/bolshaya_mama_kokoliya.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "fantiliya", name: "Фантилия", icon: "assets/weekly/fantiliya.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "korolevskiy_zhuk", name: "Королевский Жук", icon: "assets/weekly/korolevskiy_zhuk.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "voskresene", name: "Воскресенье", icon: "assets/weekly/voskresene.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "ten_fey_syao", name: "Тень Фэй Сяо", icon: "assets/weekly/ten_fey_syao.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "akvila", name: "Аквила", icon: "assets/weekly/akvila.png", element: null, tags: [], defaultLevel: 95 },
-    { id: "stalesklep", name: "Сталесклеп", icon: "assets/weekly/stalesklep.png", element: null, tags: [], defaultLevel: 95 }
+    { id: "zver_sudnogo_dnya", name: "Зверь Судного Дня", icon: "assets/weekly/zver_sudnogo_dnya.png", monster_id: 8015012, defaultLevel: 95 },
+    { id: "bolshaya_mama_kokoliya", name: "Большая Мама Коколия", icon: "assets/weekly/bolshaya_mama_kokoliya.png", monster_id: 1005013, defaultLevel: 95 },
+    { id: "fantiliya", name: "Фантилия", icon: "assets/weekly/fantiliya.png", monster_id: 801502201, defaultLevel: 95 },
+    { id: "korolevskiy_zhuk", name: "Королевский Жук", icon: "assets/weekly/korolevskiy_zhuk.png", monster_id: 8025011, defaultLevel: 95 },
+    { id: "voskresene", name: "Воскресенье", icon: "assets/weekly/voskresene.png", monster_id: 3025012, defaultLevel: 95 },
+    { id: "ten_fey_syao", name: "Тень Фэй Сяо", icon: "assets/weekly/ten_fey_syao.png", monster_id: 2035010, defaultLevel: 95 },
+    { id: "akvila", name: "Аквила", icon: "assets/weekly/akvila.png", monster_id: 401501101, defaultLevel: 95 },
+    { id: "stalesklep", name: "Сталесклеп", icon: "assets/weekly/stalesklep.png", monster_id: 4035010, defaultLevel: 95 }
 ];
 
 const OWNED_CHARACTERS = [
@@ -276,8 +293,13 @@ function renderWaves() {
                 <button class="btn-remove-enemy" onclick="removeEnemy(${wIndex}, ${eIndex})" title="Удалить">✕</button>
                 <img src="${getImagePath(enemy.icon)}" alt="${enemy.name}" onerror="imgError(this)">
                 <div class="name" title="${enemy.name}">${enemy.name}</div>
-                <input type="number" class="enemy-level" value="${enemy.level}" min="1" max="95" 
-                       onchange="updateEnemyLevel(${wIndex}, ${eIndex}, this.value)">
+                <div style="font-size:0.7rem; color:var(--text-muted);">ID: ${enemy.monster_id || '?'}</div>
+                <div style="display:flex; width:100%; gap:2px; margin-top:5px;">
+                    <input type="number" class="enemy-level" style="flex:1; padding:2px; width:45%;" value="${enemy.level}" min="1" max="95" 
+                           onchange="updateEnemyLevel(${wIndex}, ${eIndex}, this.value)" title="Уровень">
+                    <input type="number" class="enemy-level" style="flex:1; padding:2px; width:45%; color:#ff6b81;" value="${enemy.max_hp || 0}" min="0" 
+                           onchange="updateEnemyMaxHp(${wIndex}, ${eIndex}, this.value)" title="Max HP (0 = по умолчанию)">
+                </div>
             `;
             grid.appendChild(eCard);
         });
@@ -338,6 +360,13 @@ function updateEnemyLevel(wIndex, eIndex, newLevel) {
     state.waves[wIndex].enemies[eIndex].level = lvl;
     triggerAutoSave();
     renderAll();
+}
+
+function updateEnemyMaxHp(wIndex, eIndex, newHp) {
+    let hp = parseInt(newHp) || 0;
+    if (hp < 0) hp = 0;
+    state.waves[wIndex].enemies[eIndex].max_hp = hp;
+    triggerAutoSave();
 }
 
 // --- ПИКЕР ВРАГОВ ---
@@ -405,29 +434,32 @@ function renderEnemyPickerList() {
         card.innerHTML = `
             <img src="${getImagePath(enemy.icon)}" alt="${enemy.name}" onerror="imgError(this)">
             <div class="name"><strong>${enemy.name}</strong></div>
+            <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom: 2px;">ID: ${enemy.monster_id || 'custom'}</div>
             ${enemy.element ? `<div class="element">${enemy.element}</div>` : ''}
             <div class="level-selector">
                 <label>Уровень: <span id="${valId}">${enemy.defaultLevel}</span></label>
                 <input type="range" id="${sliderId}" min="1" max="95" value="${enemy.defaultLevel}" class="level-slider" oninput="document.getElementById('${valId}').innerText = this.value">
             </div>
-            <button class="btn btn-primary w-100" onclick="handleAddEnemyFromPicker('${enemy.id}', '${enemy.name}', '${enemy.icon}', '${sliderId}')">Добавить</button>
+            <button class="btn btn-primary w-100" onclick="handleAddEnemyFromPicker('${enemy.id}', '${enemy.name}', '${enemy.icon}', '${sliderId}', ${enemy.monster_id || 0})">Добавить</button>
         `;
         grid.appendChild(card);
     });
 }
 
-function handleAddEnemyFromPicker(id, name, icon, sliderId) {
+function handleAddEnemyFromPicker(id, name, icon, sliderId, monster_id) {
     const levelVal = document.getElementById(sliderId).value;
-    addEnemyToCurrentWave(id, name, parseInt(levelVal), icon);
+    addEnemyToCurrentWave(id, name, parseInt(levelVal), icon, monster_id);
 }
 
-function addEnemyToCurrentWave(id, name, level, icon) {
+function addEnemyToCurrentWave(id, name, level, icon, monster_id) {
     if (currentActiveWaveIndex !== null) {
         state.waves[currentActiveWaveIndex].enemies.push({
             id: id,
             name: name,
             level: level || 95,
-            icon: icon
+            icon: icon,
+            monster_id: monster_id || 0,
+            max_hp: 0
         });
         closeModal('enemy-picker-modal');
         renderAll();
@@ -447,19 +479,20 @@ function createCustomEnemy() {
         name: name,
         element: element,
         defaultLevel: level,
-        icon: icon
+        icon: icon,
+        monster_id: 0
     };
 
     customEnemiesPool.push(newEnemy);
     
-    addEnemyToCurrentWave(newEnemy.id, newEnemy.name, newEnemy.defaultLevel, newEnemy.icon);
+    addEnemyToCurrentWave(newEnemy.id, newEnemy.name, newEnemy.defaultLevel, newEnemy.icon, newEnemy.monster_id);
     
     document.getElementById('ce-name').value = '';
     document.getElementById('ce-element').value = '';
     document.getElementById('ce-icon').value = '';
 }
 
-// --- ПИКЕР ПЕРСОНАЖЕЙ (НОВЫЙ) ---
+// --- ПИКЕР ПЕРСОНАЖЕЙ ---
 function openCharacterPicker(mode, slotIndex = null) {
     charPickerMode = mode;
     currentActiveSlotIndex = slotIndex;
@@ -657,24 +690,86 @@ function setupEventListeners() {
     });
 }
 
-// --- ИМПОРТ / ЭКСПОРТ / СОХРАНЕНИЕ ---
-function exportJson() {
-    state.meta.updatedAt = new Date().toISOString();
-    
-    const formattedActiveChallenges = state.challenges.active.map(id => {
-        const ch = SPECIAL_CHALLENGES.find(c => c.id === id);
-        return { id: id, effect: ch ? ch.effect : null };
-    });
+// --- ИМПОРТ / ЭКСПОРТ / СОХРАНЕНИЕ В НОВОМ ФОРМАТЕ BATTLE_CONFIG ---
+function buildExportPayload() {
+    return {
+        level_name: state.levelName,
+        battle_config: {
+            battle_type: "Default",
+            monsters: state.waves.map(wave => 
+                wave.enemies.map(e => ({
+                    level: parseInt(e.level) || 95,
+                    monster_id: parseInt(e.monster_id) || 0,
+                    max_hp: parseInt(e.max_hp) || 0
+                }))
+            )
+        },
+        banned_characters: state.bannedCharacters.map(c => c ? c.id : null),
+        unlocked_characters: state.unlockedCharacters.map(c => c.id),
+        active_challenges: state.challenges.active
+    };
+}
 
+function restoreStateFromJson(parsed) {
+    state.levelName = parsed.level_name || parsed.levelName || "Импортированный уровень";
+    
+    // Обработка волн (новый battle_config.monsters ИЛИ старый waves)
+    if (parsed.battle_config && Array.isArray(parsed.battle_config.monsters)) {
+        const fullEnemyPool = [...ENEMIES_BOSSES, ...ENEMIES_WEEKLY, ...customEnemiesPool];
+        state.waves = parsed.battle_config.monsters.map(floor => {
+            return {
+                enemies: floor.map(m => {
+                    const baseEnemy = fullEnemyPool.find(e => e.monster_id === m.monster_id);
+                    return {
+                        id: baseEnemy ? baseEnemy.id : `unknown_${m.monster_id}`,
+                        name: baseEnemy ? baseEnemy.name : `Неизвестный (${m.monster_id})`,
+                        icon: baseEnemy ? baseEnemy.icon : DEFAULT_PLACEHOLDER,
+                        level: m.level || 95,
+                        monster_id: m.monster_id,
+                        max_hp: m.max_hp || 0
+                    };
+                })
+            };
+        });
+    } else if (parsed.waves) {
+        state.waves = parsed.waves; // Легаси поддержка
+    }
+
+    // Обработка банов
+    if (parsed.banned_characters) {
+        state.bannedCharacters = parsed.banned_characters.map(id => id ? OWNED_CHARACTERS.find(c => c.id === id) || {id, name:id, icon:DEFAULT_PLACEHOLDER} : null);
+    } else {
+        state.bannedCharacters = parsed.bannedCharacters || parsed.party || [null, null, null, null];
+    }
+
+    // Обработка анлоков
+    if (parsed.unlocked_characters) {
+        state.unlockedCharacters = parsed.unlocked_characters.map(id => LOCKED_CHARACTERS.find(c => c.id === id) || {id, name:id, icon:DEFAULT_PLACEHOLDER});
+    } else {
+        state.unlockedCharacters = parsed.unlockedCharacters || [];
+    }
+
+    // Обработка модификаторов
+    state.challenges.active = parsed.active_challenges || [];
+    if (parsed.activeChallenges && Array.isArray(parsed.activeChallenges)) {
+        state.challenges.active = parsed.activeChallenges.map(ch => ch.id || ch); // Легаси
+    }
+    state.challenges.unlocked = [...new Set([...state.challenges.unlocked, ...state.challenges.active])];
+    
+    renderAll();
+}
+
+function exportJson() {
+    const payload = buildExportPayload();
+    // Сохраняем кастомный пул врагов отдельно в файл, чтобы при передаче не терялись картинки кастомных врагов
     const exportData = {
-        ...state,
-        activeChallenges: formattedActiveChallenges,
+        ...payload,
         customPool: customEnemiesPool 
     };
 
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
     const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", "custom-level.json");
     document.body.appendChild(downloadAnchorNode); 
     downloadAnchorNode.click();
@@ -689,23 +784,12 @@ function importJson(event) {
     reader.onload = function(e) {
         try {
             const parsed = JSON.parse(e.target.result);
-            if (parsed.waves) {
-                state = {
-                    levelName: parsed.levelName || "Импортированный уровень",
-                    waves: parsed.waves,
-                    bannedCharacters: parsed.bannedCharacters || parsed.party || [null, null, null, null],
-                    unlockedCharacters: parsed.unlockedCharacters || [],
-                    challenges: parsed.challenges || { unlocked: [], active: [] },
-                    meta: parsed.meta || state.meta
-                };
-                customEnemiesPool = parsed.customPool || [];
-                renderAll();
-                alert("Уровень успешно импортирован!");
-            } else {
-                alert("Неверный формат JSON");
-            }
+            if (parsed.customPool) customEnemiesPool = parsed.customPool;
+            restoreStateFromJson(parsed);
+            alert("Уровень успешно импортирован!");
         } catch (error) {
             alert("Ошибка при разборе JSON");
+            console.error(error);
         }
     };
     reader.readAsText(file);
@@ -758,7 +842,6 @@ function loadState() {
     }
 }
 
-// --- ЛОГИКА CLOUDFLARE API ---
 async function sendLevel() {
     const hasEnemies = state.waves.some(w => w.enemies && w.enemies.length > 0);
     if (!hasEnemies) {
@@ -766,16 +849,10 @@ async function sendLevel() {
         return;
     }
 
-    state.meta.updatedAt = new Date().toISOString();
-    
-    const formattedActiveChallenges = state.challenges.active.map(id => {
-        const ch = SPECIAL_CHALLENGES.find(c => c.id === id);
-        return { id: id, effect: ch ? ch.effect : null };
-    });
-
+    const payload = buildExportPayload();
+    // Прикрепляем кастомный пул для облака
     const exportData = {
-        ...state,
-        activeChallenges: formattedActiveChallenges,
+        ...payload,
         customPool: customEnemiesPool 
     };
 
@@ -837,30 +914,11 @@ async function findLevelByTicket() {
         if (!response.ok) throw new Error("Ошибка загрузки уровня");
 
         const parsed = await response.json();
-
-        if (parsed.waves) {
-            state = {
-                levelName: parsed.levelName || "Импортированный уровень",
-                waves: parsed.waves,
-                bannedCharacters: parsed.bannedCharacters || parsed.party || [null, null, null, null],
-                unlockedCharacters: parsed.unlockedCharacters || [],
-                challenges: parsed.challenges || { unlocked: [], active: [] },
-                meta: parsed.meta || state.meta
-            };
-            customEnemiesPool = parsed.customPool || [];
-            
-            // Восстановление активных модификаторов из формата объекта обратно в список ID
-            if (parsed.activeChallenges && Array.isArray(parsed.activeChallenges)) {
-                state.challenges.active = parsed.activeChallenges.map(ch => ch.id);
-                state.challenges.unlocked = [...new Set([...state.challenges.unlocked, ...state.challenges.active])];
-            }
-
-            renderAll();
-            alert(`Уровень "${state.levelName}" успешно загружен!`);
-            input.value = ''; 
-        } else {
-            alert("Загруженные данные повреждены или неверны.");
-        }
+        if (parsed.customPool) customEnemiesPool = parsed.customPool;
+        restoreStateFromJson(parsed);
+        
+        alert(`Уровень "${state.levelName}" успешно загружен!`);
+        input.value = ''; 
     } catch (error) {
         alert("Ошибка загрузки уровня: " + error.message);
     } finally {

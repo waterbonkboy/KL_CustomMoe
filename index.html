@@ -35,8 +35,15 @@
         </header>
 
         <section class="section glass">
-            <h2>Party / Characters</h2>
-            <div id="party-container" class="party-grid">
+            <h2>Banned Characters (4 slots)</h2>
+            <div id="banned-container" class="party-grid">
+                </div>
+
+            <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
+                <h2>Unlocked Characters</h2>
+                <button class="btn btn-primary" onclick="openCharacterPicker('unlock')">+ Unlock Characters</button>
+            </div>
+            <div id="unlocked-container" class="party-grid" style="flex-wrap: wrap;">
                 </div>
         </section>
 
@@ -118,21 +125,24 @@
     </div>
 
     <div id="char-picker-modal" class="modal hidden">
-        <div class="modal-content glass-strong modal-md">
+        <div class="modal-content glass-strong modal-lg">
             <div class="modal-header">
-                <h2>Select Character</h2>
+                <h2 id="char-picker-title">Select Character</h2>
                 <button class="btn-close" onclick="closeModal('char-picker-modal')">✕</button>
             </div>
-            <div class="modal-body">
-                <div class="picker-toolbar">
+            <div class="modal-body" style="flex-direction: column;">
+                <div class="picker-toolbar char-toolbar">
                     <input type="text" id="char-search" placeholder="Search character..." class="input-glass">
                     <select id="char-sort" class="input-glass">
                         <option value="none">Sort</option>
                         <option value="az">A-Z</option>
                         <option value="za">Z-A</option>
                     </select>
+                    <label class="toggle-label" id="label-filter-banned" style="margin-left: auto; display: flex; align-items: center; gap: 5px;">
+                        <input type="checkbox" id="char-filter-banned"> Show banned
+                    </label>
                 </div>
-                <div id="char-grid" class="picker-grid">
+                <div id="char-grid" class="picker-grid char-grid-large">
                     </div>
             </div>
         </div>

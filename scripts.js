@@ -142,16 +142,18 @@ const LOCKED_CHARACTERS = [
 const SPECIAL_CHALLENGES = [
     { id: "sc_giga_trash", name: "Гига чат: Мусорный бак", price_rub: 20, description: "Добавляет особого противника: мусорный бак с 2 000 000 HP.", effect: { type: "spawn_special", hp: 2000000 } },
     { id: "sc_double_hp_all", name: "Удвоить HP всем противникам", price_rub: 200, description: "Повышает HP всем противникам в 2 раза.", effect: { type: "mult_hp_all", multiplier: 2 } },
-    { id: "sc_olezha_27", name: "Олежа 27", price_rub: 200, description: "20 волн светофоров ???", effect: { type: "custom_note", note: "20 волн светофоров ???" } },
+    { id: "sc_olezha_27", name: "Олежа 27", price_rub: 227, description: "20 волн светофоров ???", effect: { type: "custom_note", note: "20 волн светофоров ???" } },
     { id: "sc_hayato_live", name: "Хаято живи", price_rub: 30, description: "Добавить Жуань Мэй в команду и не дать ей погибнуть.", effect: { type: "mission", required_character_id: "ruan_mei", condition: "survive" } },
     { id: "sc_winter_falls", name: "Винтер Фолс", price_rub: 20, description: "Добавить Март 7 в отряд.", effect: { type: "force_character", character_id: "march_7" } },
     { id: "sc_kindergarten_sun", name: "Детский Садик: Солнышко", price_rub: 100, description: "Использовать на уровне только мелких персонажей.", effect: { type: "rule", rule: "only_small_characters" } },
     { id: "sc_factions_one", name: "Фракции: одна на выбор", price_rub: 100, description: "Можно использовать только одну фракцию на выбор.", effect: { type: "choose_one_faction", options: ["Лофу", "Сяньчжоу", "Станция Герта", "Златиусы", "Другое"] } },
     { id: "sc_angry_milo", name: "Злой Майло", price_rub: 80, description: "Пройти уровень без 1 персонажа (один слот команды недоступен).", effect: { type: "team_restriction", disabled_slots: 1 } },
     
+    // Глобальные модификаторы
     { id: "sc_kirena_e6r5", name: "Жена в домике", price_rub: 200, description: "Добавить E6 R5 Кирена в отряд. Разрешает добавить Кирену независимо от ограничений.", effect: { type: "force_character", character_id: "kirena", eidolons: 6 }, isGlobal: true },
     { id: "sc_amphoreus", name: "АМФОРЕУС ПРОТИВ ВСЕХ БОССОВ", price_rub: 666, description: "Добавить отряд из всех Злаусов: Трибиос, Кирена, Темень, Март 7, Дань Хэн, Гелектра, Гиацинтия, Первопроходец, Анаксагор, Мидеймос, Кастория, Цифера.", effect: { type: "global_roster", allowed: "zlaus_only" }, isGlobal: true },
-    { id: "sc_clone_wars", name: "Война Клонов", price_rub: 100, description: "Отряд из 4 одинаковых персонажей. Отключает проверку на уникальность персонажей и разрешает дубли.", effect: { type: "allow_duplicates" }, isGlobal: true }
+    { id: "sc_clone_wars", name: "Война Клонов", price_rub: 100, description: "Отряд из 4 одинаковых персонажей. Отключает проверку на уникальность персонажей и разрешает дубли.", effect: { type: "allow_duplicates" }, isGlobal: true },
+    { id: "sc_final_boss_stalesklep", name: "ФИНАЛЬНЫЙ БОСС", price_rub: 999, description: "Заспавнить Сталесклепа с 99 999 999 HP. НАСТОЯЩИЙ БОСС АМФОРЕУСА.", effect: { type: "spawn_special_boss", boss_id: 4035010, hp: 99999999 }, isGlobal: true }
 ];
 
 // --- СОСТОЯНИЕ ПРИЛОЖЕНИЯ ---
